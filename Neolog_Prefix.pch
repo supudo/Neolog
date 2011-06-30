@@ -1,0 +1,11 @@
+//
+// Prefix header for all source files of the 'Neolog' target in the 'Neolog' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+	#import <CoreData/CoreData.h>
+	#import "NeologAppDelegate.h"
+	#import "nlSettings.h"
+#endif

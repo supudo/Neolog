@@ -1,0 +1,714 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* NeologAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* NeologAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
+		8A29D44D13BC6764004B37BF /* Words.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D44B13BC6764004B37BF /* Words.m */; };
+		8A29D44E13BC6764004B37BF /* Words.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D44C13BC6764004B37BF /* Words.xib */; };
+		8A29D47A13BC6DED004B37BF /* dbWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D47913BC6DED004B37BF /* dbWord.m */; };
+		8A29D4F113BC7728004B37BF /* WordDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D4EF13BC7728004B37BF /* WordDetails.m */; };
+		8A29D4F213BC7728004B37BF /* WordDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D4F013BC7728004B37BF /* WordDetails.xib */; };
+		8A29D58613BC7B73004B37BF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D58413BC7B73004B37BF /* Icon.png */; };
+		8A29D58713BC7B73004B37BF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D58513BC7B73004B37BF /* Icon@2x.png */; };
+		8A29D5D213BC82DE004B37BF /* dbWordComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D5D113BC82DE004B37BF /* dbWordComment.m */; };
+		8A29D63713BC8B0A004B37BF /* WordComments.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D63513BC8B0A004B37BF /* WordComments.m */; };
+		8A29D63813BC8B0A004B37BF /* WordComments.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D63613BC8B0A004B37BF /* WordComments.xib */; };
+		8A29D6BC13BC9383004B37BF /* CellWordComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D6BA13BC9383004B37BF /* CellWordComment.m */; };
+		8A29D6BD13BC9383004B37BF /* CellWordComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D6BB13BC9383004B37BF /* CellWordComment.xib */; };
+		8A29D7D713BCA4AB004B37BF /* WordSendComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D7D513BCA4AB004B37BF /* WordSendComment.m */; };
+		8A29D7D813BCA4AB004B37BF /* WordSendComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D7D613BCA4AB004B37BF /* WordSendComment.xib */; };
+		8A29D97513BCB54E004B37BF /* dbSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A29D97413BCB54E004B37BF /* dbSetting.m */; };
+		8A29D9E613BCBBF0004B37BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A29D9E513BCBBF0004B37BF /* Localizable.strings */; };
+		8A87E07F13BB6D0000BA16C9 /* gaz.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A87E07E13BB6D0000BA16C9 /* gaz.png */; };
+		8A87E17213BC4AF200BA16C9 /* dbStaticContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A87E17113BC4AF200BA16C9 /* dbStaticContent.m */; };
+		8AAA002113BB064B00CDC94C /* About.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA001F13BB064B00CDC94C /* About.m */; };
+		8AAA002213BB064B00CDC94C /* About.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA002013BB064B00CDC94C /* About.xib */; };
+		8AAA002613BB068000CDC94C /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA002413BB068000CDC94C /* Settings.m */; };
+		8AAA002713BB068000CDC94C /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA002513BB068000CDC94C /* Settings.xib */; };
+		8AAA003D13BB073A00CDC94C /* nlSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA003C13BB073A00CDC94C /* nlSettings.m */; };
+		8AAA004B13BB08DD00CDC94C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA004A13BB08DD00CDC94C /* Reachability.m */; };
+		8AAA008B13BB09EC00CDC94C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAA008A13BB09EC00CDC94C /* SystemConfiguration.framework */; };
+		8AAA009313BB0A1000CDC94C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAA009213BB0A1000CDC94C /* CoreData.framework */; };
+		8AAA009513BB0A1000CDC94C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAA009413BB0A1000CDC94C /* CoreLocation.framework */; };
+		8AAA009713BB0A1000CDC94C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AAA009613BB0A1000CDC94C /* MobileCoreServices.framework */; };
+		8AAA00AA13BB0A6300CDC94C /* LettersAndNests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA00A813BB0A6300CDC94C /* LettersAndNests.m */; };
+		8AAA00AB13BB0A6300CDC94C /* LettersAndNests.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA00A913BB0A6300CDC94C /* LettersAndNests.xib */; };
+		8AAA00AF13BB0A7400CDC94C /* SendWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA00AD13BB0A7400CDC94C /* SendWord.m */; };
+		8AAA00B013BB0A7400CDC94C /* SendWord.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA00AE13BB0A7400CDC94C /* SendWord.xib */; };
+		8AAA00C613BB0AA800CDC94C /* tb-words.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA00C513BB0AA800CDC94C /* tb-words.png */; };
+		8AAA00C813BB0AB400CDC94C /* tb-sendword.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA00C713BB0AB400CDC94C /* tb-sendword.png */; };
+		8AAA00CA13BB0AC100CDC94C /* tb-settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AAA00C913BB0AC100CDC94C /* tb-settings.png */; };
+		8AFB68AE13BB112A00CB1491 /* Neolog.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB68AD13BB112A00CB1491 /* Neolog.xcdatamodel */; };
+		8AFB68B413BB12C700CB1491 /* WordDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB68B213BB12C700CB1491 /* WordDesc.m */; };
+		8AFB68B513BB12C700CB1491 /* WordDesc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB68B313BB12C700CB1491 /* WordDesc.xib */; };
+		8AFB68FA13BB19FB00CB1491 /* CurrentWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB68F913BB19FB00CB1491 /* CurrentWord.m */; };
+		8AFB6A1113BB36C800CB1491 /* DBManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6A1013BB36C800CB1491 /* DBManagedObjectContext.m */; };
+		8AFB6A1713BB373400CB1491 /* dbNest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6A1413BB373400CB1491 /* dbNest.m */; };
+		8AFB6A1813BB373400CB1491 /* dbAccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6A1613BB373400CB1491 /* dbAccountData.m */; };
+		8AFB6A4913BB3B7600CB1491 /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6A4813BB3B7600CB1491 /* WebService.m */; };
+		8AFB6A4C13BB3C1800CB1491 /* URLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6A4B13BB3C1800CB1491 /* URLReader.m */; };
+		8AFB6A6B13BB3E0B00CB1491 /* Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6A6913BB3E0B00CB1491 /* Loading.m */; };
+		8AFB6A6C13BB3E0B00CB1491 /* Loading.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB6A6A13BB3E0B00CB1491 /* Loading.xib */; };
+		8AFB6A8313BB3EA800CB1491 /* logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8AFB6A8213BB3EA800CB1491 /* logo.gif */; };
+		8AFB6ACE13BB465200CB1491 /* BlackAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFB6ACD13BB465200CB1491 /* BlackAlertView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* NeologAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeologAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* NeologAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeologAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* Neolog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neolog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AB4B0D9B1048005BE974 /* Neolog_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neolog_Prefix.pch; sourceTree = "<group>"; };
+		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8A29D44A13BC6764004B37BF /* Words.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Words.h; path = ../Words.h; sourceTree = "<group>"; };
+		8A29D44B13BC6764004B37BF /* Words.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Words.m; path = ../Words.m; sourceTree = "<group>"; };
+		8A29D44C13BC6764004B37BF /* Words.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Words.xib; sourceTree = "<group>"; };
+		8A29D47813BC6DED004B37BF /* dbWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbWord.h; sourceTree = "<group>"; };
+		8A29D47913BC6DED004B37BF /* dbWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbWord.m; sourceTree = "<group>"; };
+		8A29D4EE13BC7728004B37BF /* WordDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordDetails.h; path = ../WordDetails.h; sourceTree = "<group>"; };
+		8A29D4EF13BC7728004B37BF /* WordDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordDetails.m; path = ../WordDetails.m; sourceTree = "<group>"; };
+		8A29D4F013BC7728004B37BF /* WordDetails.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetails.xib; sourceTree = "<group>"; };
+		8A29D58413BC7B73004B37BF /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8A29D58513BC7B73004B37BF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		8A29D5D013BC82DE004B37BF /* dbWordComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbWordComment.h; sourceTree = "<group>"; };
+		8A29D5D113BC82DE004B37BF /* dbWordComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbWordComment.m; sourceTree = "<group>"; };
+		8A29D63413BC8B0A004B37BF /* WordComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordComments.h; path = ../WordComments.h; sourceTree = "<group>"; };
+		8A29D63513BC8B0A004B37BF /* WordComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordComments.m; path = ../WordComments.m; sourceTree = "<group>"; };
+		8A29D63613BC8B0A004B37BF /* WordComments.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordComments.xib; sourceTree = "<group>"; };
+		8A29D6B913BC9383004B37BF /* CellWordComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellWordComment.h; path = ../CellWordComment.h; sourceTree = "<group>"; };
+		8A29D6BA13BC9383004B37BF /* CellWordComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellWordComment.m; path = ../CellWordComment.m; sourceTree = "<group>"; };
+		8A29D6BB13BC9383004B37BF /* CellWordComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellWordComment.xib; sourceTree = "<group>"; };
+		8A29D7D413BCA4AB004B37BF /* WordSendComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordSendComment.h; path = ../WordSendComment.h; sourceTree = "<group>"; };
+		8A29D7D513BCA4AB004B37BF /* WordSendComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordSendComment.m; path = ../WordSendComment.m; sourceTree = "<group>"; };
+		8A29D7D613BCA4AB004B37BF /* WordSendComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordSendComment.xib; sourceTree = "<group>"; };
+		8A29D97313BCB54E004B37BF /* dbSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbSetting.h; sourceTree = "<group>"; };
+		8A29D97413BCB54E004B37BF /* dbSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbSetting.m; sourceTree = "<group>"; };
+		8A29D9E313BCBBEC004B37BF /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8A87E07E13BB6D0000BA16C9 /* gaz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gaz.png; sourceTree = "<group>"; };
+		8A87E17013BC4AF200BA16C9 /* dbStaticContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbStaticContent.h; sourceTree = "<group>"; };
+		8A87E17113BC4AF200BA16C9 /* dbStaticContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbStaticContent.m; sourceTree = "<group>"; };
+		8AAA001E13BB064B00CDC94C /* About.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = About.h; path = ../About.h; sourceTree = "<group>"; };
+		8AAA001F13BB064B00CDC94C /* About.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = About.m; path = ../About.m; sourceTree = "<group>"; };
+		8AAA002013BB064B00CDC94C /* About.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = About.xib; sourceTree = "<group>"; };
+		8AAA002313BB068000CDC94C /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = ../Settings.h; sourceTree = "<group>"; };
+		8AAA002413BB068000CDC94C /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = ../Settings.m; sourceTree = "<group>"; };
+		8AAA002513BB068000CDC94C /* Settings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		8AAA003A13BB072E00CDC94C /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		8AAA003B13BB073A00CDC94C /* nlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nlSettings.h; sourceTree = "<group>"; };
+		8AAA003C13BB073A00CDC94C /* nlSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nlSettings.m; sourceTree = "<group>"; };
+		8AAA004913BB08DD00CDC94C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		8AAA004A13BB08DD00CDC94C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		8AAA008A13BB09EC00CDC94C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8AAA009213BB0A1000CDC94C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8AAA009413BB0A1000CDC94C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8AAA009613BB0A1000CDC94C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		8AAA00A713BB0A6300CDC94C /* LettersAndNests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LettersAndNests.h; sourceTree = "<group>"; };
+		8AAA00A813BB0A6300CDC94C /* LettersAndNests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LettersAndNests.m; sourceTree = "<group>"; };
+		8AAA00A913BB0A6300CDC94C /* LettersAndNests.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LettersAndNests.xib; path = Classes/LettersAndNests.xib; sourceTree = "<group>"; };
+		8AAA00AC13BB0A7400CDC94C /* SendWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendWord.h; sourceTree = "<group>"; };
+		8AAA00AD13BB0A7400CDC94C /* SendWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendWord.m; sourceTree = "<group>"; };
+		8AAA00AE13BB0A7400CDC94C /* SendWord.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SendWord.xib; path = Classes/SendWord.xib; sourceTree = "<group>"; };
+		8AAA00C513BB0AA800CDC94C /* tb-words.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-words.png"; sourceTree = "<group>"; };
+		8AAA00C713BB0AB400CDC94C /* tb-sendword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-sendword.png"; sourceTree = "<group>"; };
+		8AAA00C913BB0AC100CDC94C /* tb-settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-settings.png"; sourceTree = "<group>"; };
+		8AFB68AD13BB112A00CB1491 /* Neolog.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Neolog.xcdatamodel; sourceTree = "<group>"; };
+		8AFB68B113BB12C700CB1491 /* WordDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordDesc.h; path = ../WordDesc.h; sourceTree = "<group>"; };
+		8AFB68B213BB12C700CB1491 /* WordDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordDesc.m; path = ../WordDesc.m; sourceTree = "<group>"; };
+		8AFB68B313BB12C700CB1491 /* WordDesc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDesc.xib; sourceTree = "<group>"; };
+		8AFB68F813BB19FB00CB1491 /* CurrentWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentWord.h; sourceTree = "<group>"; };
+		8AFB68F913BB19FB00CB1491 /* CurrentWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWord.m; sourceTree = "<group>"; };
+		8AFB6A0F13BB36C800CB1491 /* DBManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagedObjectContext.h; sourceTree = "<group>"; };
+		8AFB6A1013BB36C800CB1491 /* DBManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagedObjectContext.m; sourceTree = "<group>"; };
+		8AFB6A1313BB373400CB1491 /* dbNest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbNest.h; sourceTree = "<group>"; };
+		8AFB6A1413BB373400CB1491 /* dbNest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbNest.m; sourceTree = "<group>"; };
+		8AFB6A1513BB373400CB1491 /* dbAccountData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbAccountData.h; sourceTree = "<group>"; };
+		8AFB6A1613BB373400CB1491 /* dbAccountData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dbAccountData.m; sourceTree = "<group>"; };
+		8AFB6A4713BB3B7600CB1491 /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
+		8AFB6A4813BB3B7600CB1491 /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
+		8AFB6A4A13BB3C1800CB1491 /* URLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLReader.h; sourceTree = "<group>"; };
+		8AFB6A4B13BB3C1800CB1491 /* URLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLReader.m; sourceTree = "<group>"; };
+		8AFB6A6813BB3E0B00CB1491 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Loading.h; path = ../Loading.h; sourceTree = "<group>"; };
+		8AFB6A6913BB3E0B00CB1491 /* Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Loading.m; path = ../Loading.m; sourceTree = "<group>"; };
+		8AFB6A6A13BB3E0B00CB1491 /* Loading.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Loading.xib; sourceTree = "<group>"; };
+		8AFB6A8213BB3EA800CB1491 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo.gif; sourceTree = "<group>"; };
+		8AFB6ACC13BB465200CB1491 /* BlackAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackAlertView.h; sourceTree = "<group>"; };
+		8AFB6ACD13BB465200CB1491 /* BlackAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackAlertView.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Neolog-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Neolog-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
+				8AAA008B13BB09EC00CDC94C /* SystemConfiguration.framework in Frameworks */,
+				8AAA009313BB0A1000CDC94C /* CoreData.framework in Frameworks */,
+				8AAA009513BB0A1000CDC94C /* CoreLocation.framework in Frameworks */,
+				8AAA009713BB0A1000CDC94C /* MobileCoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA003713BB071600CDC94C /* Utilities */,
+				8A29D6BE13BC938F004B37BF /* Extended */,
+				8AAA001713BB05ED00CDC94C /* Controllers */,
+				1D3623240D0F684500981E51 /* NeologAppDelegate.h */,
+				1D3623250D0F684500981E51 /* NeologAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* Neolog.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Neolog */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				8AAA001313BB057A00CDC94C /* PList */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Neolog;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AB4B0D9B1048005BE974 /* Neolog_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA00B113BB0A8300CDC94C /* Assets */,
+				8A29D6B713BC936A004B37BF /* Extended */,
+				8AAA001613BB05E400CDC94C /* Controllers */,
+				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765070DF74369002DB57D /* CoreGraphics.framework */,
+				8AAA008A13BB09EC00CDC94C /* SystemConfiguration.framework */,
+				8AAA009213BB0A1000CDC94C /* CoreData.framework */,
+				8AAA009413BB0A1000CDC94C /* CoreLocation.framework */,
+				8AAA009613BB0A1000CDC94C /* MobileCoreServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A29D6B713BC936A004B37BF /* Extended */ = {
+			isa = PBXGroup;
+			children = (
+				8A29D6B813BC9374004B37BF /* UI */,
+			);
+			name = Extended;
+			sourceTree = "<group>";
+		};
+		8A29D6B813BC9374004B37BF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8A29D6BB13BC9383004B37BF /* CellWordComment.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		8A29D6BE13BC938F004B37BF /* Extended */ = {
+			isa = PBXGroup;
+			children = (
+				8A29D6B913BC9383004B37BF /* CellWordComment.h */,
+				8A29D6BA13BC9383004B37BF /* CellWordComment.m */,
+			);
+			name = Extended;
+			sourceTree = "<group>";
+		};
+		8A29D9E213BCBBDE004B37BF /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				8A29D9E513BCBBF0004B37BF /* Localizable.strings */,
+			);
+			name = Languages;
+			sourceTree = "<group>";
+		};
+		8AAA001313BB057A00CDC94C /* PList */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Neolog-Info.plist */,
+			);
+			name = PList;
+			sourceTree = "<group>";
+		};
+		8AAA001613BB05E400CDC94C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A6713BB3E0200CB1491 /* Loading */,
+				8AAA002F13BB06D100CDC94C /* Words */,
+				8AAA003013BB06D600CDC94C /* SendWord */,
+				8AAA003113BB06DB00CDC94C /* Misc */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8AAA001713BB05ED00CDC94C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A6113BB3DF500CB1491 /* Loading */,
+				8AAA003413BB06EF00CDC94C /* Words */,
+				8AAA003313BB06EA00CDC94C /* SendWord */,
+				8AAA003213BB06E500CDC94C /* Misc */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8AAA002F13BB06D100CDC94C /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA00A913BB0A6300CDC94C /* LettersAndNests.xib */,
+				8A29D44C13BC6764004B37BF /* Words.xib */,
+				8A29D4F013BC7728004B37BF /* WordDetails.xib */,
+				8A29D63613BC8B0A004B37BF /* WordComments.xib */,
+				8A29D7D613BCA4AB004B37BF /* WordSendComment.xib */,
+			);
+			name = Words;
+			sourceTree = "<group>";
+		};
+		8AAA003013BB06D600CDC94C /* SendWord */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA00AE13BB0A7400CDC94C /* SendWord.xib */,
+				8AFB68B313BB12C700CB1491 /* WordDesc.xib */,
+			);
+			name = SendWord;
+			sourceTree = "<group>";
+		};
+		8AAA003113BB06DB00CDC94C /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA002513BB068000CDC94C /* Settings.xib */,
+				8AAA002013BB064B00CDC94C /* About.xib */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		8AAA003213BB06E500CDC94C /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA002313BB068000CDC94C /* Settings.h */,
+				8AAA002413BB068000CDC94C /* Settings.m */,
+				8AAA001E13BB064B00CDC94C /* About.h */,
+				8AAA001F13BB064B00CDC94C /* About.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		8AAA003313BB06EA00CDC94C /* SendWord */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA00AC13BB0A7400CDC94C /* SendWord.h */,
+				8AAA00AD13BB0A7400CDC94C /* SendWord.m */,
+				8AFB68B113BB12C700CB1491 /* WordDesc.h */,
+				8AFB68B213BB12C700CB1491 /* WordDesc.m */,
+			);
+			name = SendWord;
+			sourceTree = "<group>";
+		};
+		8AAA003413BB06EF00CDC94C /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA00A713BB0A6300CDC94C /* LettersAndNests.h */,
+				8AAA00A813BB0A6300CDC94C /* LettersAndNests.m */,
+				8A29D44A13BC6764004B37BF /* Words.h */,
+				8A29D44B13BC6764004B37BF /* Words.m */,
+				8A29D4EE13BC7728004B37BF /* WordDetails.h */,
+				8A29D4EF13BC7728004B37BF /* WordDetails.m */,
+				8A29D63413BC8B0A004B37BF /* WordComments.h */,
+				8A29D63513BC8B0A004B37BF /* WordComments.m */,
+				8A29D7D413BCA4AB004B37BF /* WordSendComment.h */,
+				8A29D7D513BCA4AB004B37BF /* WordSendComment.m */,
+			);
+			name = Words;
+			sourceTree = "<group>";
+		};
+		8AAA003713BB071600CDC94C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6ACB13BB464800CB1491 /* UI */,
+				8AFB6A4613BB3B6600CB1491 /* Services */,
+				8AFB68F713BB19EC00CB1491 /* Data */,
+				8AAA004813BB08D400CDC94C /* NET */,
+				8AAA003A13BB072E00CDC94C /* SynthesizeSingleton.h */,
+				8AAA003B13BB073A00CDC94C /* nlSettings.h */,
+				8AAA003C13BB073A00CDC94C /* nlSettings.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		8AAA004813BB08D400CDC94C /* NET */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A4A13BB3C1800CB1491 /* URLReader.h */,
+				8AFB6A4B13BB3C1800CB1491 /* URLReader.m */,
+				8AAA004913BB08DD00CDC94C /* Reachability.h */,
+				8AAA004A13BB08DD00CDC94C /* Reachability.m */,
+			);
+			name = NET;
+			sourceTree = "<group>";
+		};
+		8AAA00B113BB0A8300CDC94C /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				8A29D9E213BCBBDE004B37BF /* Languages */,
+				8AFB68AC13BB111700CB1491 /* Database */,
+				8AAA00B213BB0A8700CDC94C /* Images */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		8AAA00B213BB0A8700CDC94C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A8113BB3E9500CB1491 /* Tabbar */,
+				8AFB6A8213BB3EA800CB1491 /* logo.gif */,
+				8A87E07E13BB6D0000BA16C9 /* gaz.png */,
+				8A29D58413BC7B73004B37BF /* Icon.png */,
+				8A29D58513BC7B73004B37BF /* Icon@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		8AFB68AC13BB111700CB1491 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB68AD13BB112A00CB1491 /* Neolog.xcdatamodel */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		8AFB68F713BB19EC00CB1491 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A0E13BB36B900CB1491 /* DB */,
+				8AFB68F813BB19FB00CB1491 /* CurrentWord.h */,
+				8AFB68F913BB19FB00CB1491 /* CurrentWord.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		8AFB6A0E13BB36B900CB1491 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A1213BB372400CB1491 /* Entities */,
+				8AFB6A0F13BB36C800CB1491 /* DBManagedObjectContext.h */,
+				8AFB6A1013BB36C800CB1491 /* DBManagedObjectContext.m */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
+		8AFB6A1213BB372400CB1491 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A1313BB373400CB1491 /* dbNest.h */,
+				8AFB6A1413BB373400CB1491 /* dbNest.m */,
+				8AFB6A1513BB373400CB1491 /* dbAccountData.h */,
+				8AFB6A1613BB373400CB1491 /* dbAccountData.m */,
+				8A87E17013BC4AF200BA16C9 /* dbStaticContent.h */,
+				8A87E17113BC4AF200BA16C9 /* dbStaticContent.m */,
+				8A29D47813BC6DED004B37BF /* dbWord.h */,
+				8A29D47913BC6DED004B37BF /* dbWord.m */,
+				8A29D5D013BC82DE004B37BF /* dbWordComment.h */,
+				8A29D5D113BC82DE004B37BF /* dbWordComment.m */,
+				8A29D97313BCB54E004B37BF /* dbSetting.h */,
+				8A29D97413BCB54E004B37BF /* dbSetting.m */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		8AFB6A4613BB3B6600CB1491 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A4713BB3B7600CB1491 /* WebService.h */,
+				8AFB6A4813BB3B7600CB1491 /* WebService.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		8AFB6A6113BB3DF500CB1491 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A6813BB3E0B00CB1491 /* Loading.h */,
+				8AFB6A6913BB3E0B00CB1491 /* Loading.m */,
+			);
+			name = Loading;
+			sourceTree = "<group>";
+		};
+		8AFB6A6713BB3E0200CB1491 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6A6A13BB3E0B00CB1491 /* Loading.xib */,
+			);
+			name = Loading;
+			sourceTree = "<group>";
+		};
+		8AFB6A8113BB3E9500CB1491 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				8AAA00C513BB0AA800CDC94C /* tb-words.png */,
+				8AAA00C713BB0AB400CDC94C /* tb-sendword.png */,
+				8AAA00C913BB0AC100CDC94C /* tb-settings.png */,
+			);
+			name = Tabbar;
+			sourceTree = "<group>";
+		};
+		8AFB6ACB13BB464800CB1491 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8AFB6ACC13BB465200CB1491 /* BlackAlertView.h */,
+				8AFB6ACD13BB465200CB1491 /* BlackAlertView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Neolog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Neolog" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Neolog;
+			productName = Neolog;
+			productReference = 1D6058910D05DD3D006BFB54 /* Neolog.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = neolog.bg;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Neolog" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				Bulgarian,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Neolog */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Neolog */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
+				8AAA002213BB064B00CDC94C /* About.xib in Resources */,
+				8AAA002713BB068000CDC94C /* Settings.xib in Resources */,
+				8AAA00AB13BB0A6300CDC94C /* LettersAndNests.xib in Resources */,
+				8AAA00B013BB0A7400CDC94C /* SendWord.xib in Resources */,
+				8AAA00C613BB0AA800CDC94C /* tb-words.png in Resources */,
+				8AAA00C813BB0AB400CDC94C /* tb-sendword.png in Resources */,
+				8AAA00CA13BB0AC100CDC94C /* tb-settings.png in Resources */,
+				8AFB68B513BB12C700CB1491 /* WordDesc.xib in Resources */,
+				8AFB6A6C13BB3E0B00CB1491 /* Loading.xib in Resources */,
+				8AFB6A8313BB3EA800CB1491 /* logo.gif in Resources */,
+				8A87E07F13BB6D0000BA16C9 /* gaz.png in Resources */,
+				8A29D44E13BC6764004B37BF /* Words.xib in Resources */,
+				8A29D4F213BC7728004B37BF /* WordDetails.xib in Resources */,
+				8A29D58613BC7B73004B37BF /* Icon.png in Resources */,
+				8A29D58713BC7B73004B37BF /* Icon@2x.png in Resources */,
+				8A29D63813BC8B0A004B37BF /* WordComments.xib in Resources */,
+				8A29D6BD13BC9383004B37BF /* CellWordComment.xib in Resources */,
+				8A29D7D813BCA4AB004B37BF /* WordSendComment.xib in Resources */,
+				8A29D9E613BCBBF0004B37BF /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* NeologAppDelegate.m in Sources */,
+				8AAA002113BB064B00CDC94C /* About.m in Sources */,
+				8AAA002613BB068000CDC94C /* Settings.m in Sources */,
+				8AAA003D13BB073A00CDC94C /* nlSettings.m in Sources */,
+				8AAA004B13BB08DD00CDC94C /* Reachability.m in Sources */,
+				8AAA00AA13BB0A6300CDC94C /* LettersAndNests.m in Sources */,
+				8AAA00AF13BB0A7400CDC94C /* SendWord.m in Sources */,
+				8AFB68AE13BB112A00CB1491 /* Neolog.xcdatamodel in Sources */,
+				8AFB68B413BB12C700CB1491 /* WordDesc.m in Sources */,
+				8AFB68FA13BB19FB00CB1491 /* CurrentWord.m in Sources */,
+				8AFB6A1113BB36C800CB1491 /* DBManagedObjectContext.m in Sources */,
+				8AFB6A1713BB373400CB1491 /* dbNest.m in Sources */,
+				8AFB6A1813BB373400CB1491 /* dbAccountData.m in Sources */,
+				8AFB6A4913BB3B7600CB1491 /* WebService.m in Sources */,
+				8AFB6A4C13BB3C1800CB1491 /* URLReader.m in Sources */,
+				8AFB6A6B13BB3E0B00CB1491 /* Loading.m in Sources */,
+				8AFB6ACE13BB465200CB1491 /* BlackAlertView.m in Sources */,
+				8A87E17213BC4AF200BA16C9 /* dbStaticContent.m in Sources */,
+				8A29D44D13BC6764004B37BF /* Words.m in Sources */,
+				8A29D47A13BC6DED004B37BF /* dbWord.m in Sources */,
+				8A29D4F113BC7728004B37BF /* WordDetails.m in Sources */,
+				8A29D5D213BC82DE004B37BF /* dbWordComment.m in Sources */,
+				8A29D63713BC8B0A004B37BF /* WordComments.m in Sources */,
+				8A29D6BC13BC9383004B37BF /* CellWordComment.m in Sources */,
+				8A29D7D713BCA4AB004B37BF /* WordSendComment.m in Sources */,
+				8A29D97513BCB54E004B37BF /* dbSetting.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8A29D9E513BCBBF0004B37BF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A29D9E313BCBBEC004B37BF /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Neolog_Prefix.pch;
+				INFOPLIST_FILE = "Neolog-Info.plist";
+				PRODUCT_NAME = Neolog;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Neolog_Prefix.pch;
+				INFOPLIST_FILE = "Neolog-Info.plist";
+				PRODUCT_NAME = Neolog;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Neolog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Neolog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

@@ -1,0 +1,28 @@
+/* 
+   Localizable.strings
+   Neolog
+
+   Created by supudo on 6/30/11.
+   Copyright 2011 neolog.bg. All rights reserved.
+   
+   Pseudo-localization  for review purposes
+ */
+
+"Error" = "Грешка"; // Error
+"OK" = "ОК"; // OK
+"Settings" = "Настройки"; // Settings
+"RememberPrivateData" = "Помни име, имейл и URL"; // Remember name, email and URL
+"ExternalURLWarning" = "Това действие ще затвори текущото приложение и ще отвори Safari.\nСигурни ли сте?"; // This will close the app, and will open Safari
+"NONO" = "Нене..."; // No no...
+"MissingReqFields" = "Изпуснали сте някои от задължителните полета."; // Missing required fields
+"ThankYou" = "Благодарим ви!"; // Thank you!
+"Description" = "Какво значи"; // Description
+"Example" = "Примери"; // Example
+"Ethimology" = "Етимология"; // Ethimology
+"Choose" = "Избери..."; // Choose...
+"Nests" = "Гнезда"; // Nests
+"Letters" = "Букви"; // Nests
+"Bravo" = "Браво!"; // Bravo
+"GO" = "Газ!"; // Go
+"SendWord" = "Изпрати дума"; // Send word
+"SeeComments" = "Какво казват другите..."; // See what other people say
