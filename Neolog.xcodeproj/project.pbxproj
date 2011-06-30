@@ -124,6 +124,7 @@
 		8AAA00C513BB0AA800CDC94C /* tb-words.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-words.png"; sourceTree = "<group>"; };
 		8AAA00C713BB0AB400CDC94C /* tb-sendword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-sendword.png"; sourceTree = "<group>"; };
 		8AAA00C913BB0AC100CDC94C /* tb-settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-settings.png"; sourceTree = "<group>"; };
+		8AC62BDA13BCC43F0049A5C6 /* Readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.markdown; sourceTree = "<group>"; };
 		8AFB68AD13BB112A00CB1491 /* Neolog.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Neolog.xcdatamodel; sourceTree = "<group>"; };
 		8AFB68B113BB12C700CB1491 /* WordDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WordDesc.h; path = ../WordDesc.h; sourceTree = "<group>"; };
 		8AFB68B213BB12C700CB1491 /* WordDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WordDesc.m; path = ../WordDesc.m; sourceTree = "<group>"; };
@@ -397,6 +398,7 @@
 				8A29D9E213BCBBDE004B37BF /* Languages */,
 				8AFB68AC13BB111700CB1491 /* Database */,
 				8AAA00B213BB0A8700CDC94C /* Images */,
+				8AC62BDA13BCC43F0049A5C6 /* Readme.markdown */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
