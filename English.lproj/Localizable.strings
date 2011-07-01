@@ -5,7 +5,7 @@
    Created by supudo on 6/30/11.
    Copyright 2011 neolog.bg. All rights reserved.
    
-   Pseudo-localization  for review purposes
+   Pseudo-localization for review purposes
  */
 
 "Error" = "Грешка"; // Error
@@ -26,3 +26,6 @@
 "GO" = "Газ!"; // Go
 "SendWord" = "Изпрати дума"; // Send word
 "SeeComments" = "Какво казват другите..."; // See what other people say
+"Search" = "Търсене"; // Search
+"SearchTooSmall" = "Моля, въведете по-дълъг текст."; // Please, enter longer text
+"SearchNoResults" = "Нищо намерено.\nОпитайте с нещо друго..."; // Nothing found. Try with something else...

@@ -16,11 +16,12 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 
 @implementation LettersAndNests
 
-@synthesize nests, headerNests, headerLetters, webService, navTitle;
+@synthesize nests, headerNests, headerLetters, webService, navTitle, searchActive;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.navigationItem.title = NSLocalizedString(@"Choose", @"Choose");
+	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(toggleSearch)] autorelease];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -29,12 +30,45 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	if (webService == nil)
 		webService = [[WebService alloc] init];
 	[webService setDelegate:self];
+	
+	searchActive = FALSE;
+	[self toggleSearch];
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"OrderPos" ascending:YES];
 	NSArray *arrSorters = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[sortDescriptor release];
 	nests = [[NSArray alloc] initWithArray:[[DBManagedObjectContext sharedDBManagedObjectContext] getEntities:@"Nest" sortDescriptors:arrSorters]];
 	[arrSorters release];
+}
+
+- (void)toggleSearch {
+	if (searchActive) {
+		[self.searchDisplayController.searchBar removeFromSuperview];
+		searchActive = FALSE;
+		CGRect f = self.view.frame;
+		f.origin.y -= self.searchDisplayController.searchBar.frame.size.height;
+		f.size.height += self.searchDisplayController.searchBar.frame.size.height;
+		self.view.frame = f;
+	}
+	else {
+		self.searchDisplayController.searchBar.alpha = 0;
+		[self.view addSubview:self.searchDisplayController.searchBar];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDelay:.2];
+		[UIView setAnimationDuration:.4];
+		self.searchDisplayController.searchBar.alpha = 1;
+		[UIView commitAnimations];
+		searchActive = TRUE;
+		CGRect f = self.view.frame;
+		f.origin.y += self.searchDisplayController.searchBar.frame.size.height;
+		f.size.height += self.searchDisplayController.searchBar.frame.size.height;
+		self.view.frame = f;
+	}
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 }
 
 #pragma mark -
@@ -126,6 +160,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 - (void)serviceError:(id)sender error:(NSString *)errorMessage {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:NSLocalizedString(@"NONO", @"NONO") otherButtonTitles:NSLocalizedString(@"OK", @"OK"), nil];
+	alert.tag = 1;
 	[alert show];
 	[alert release];
 }
@@ -142,6 +177,44 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	tvc.navTitle = navTitle;
 	[[self navigationController] pushViewController:tvc animated:YES];
 	[tvc release];
+}
+
+- (void)searchForWordsFinished:(id)sender {
+	Words *tvc = [[Words alloc] initWithNibName:@"Words" bundle:nil];
+	tvc.navTitle = NSLocalizedString(@"Search", @"Search");
+	[[self navigationController] pushViewController:tvc animated:YES];
+	[tvc release];
+}
+
+- (void)searchForWordsNoResultsFinished:(id)sender {
+	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"SearchNoResults", @"SearchNoResults")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	alert.tag = 3;
+	[alert show];
+	[alert release];
+}
+
+#pragma mark -
+#pragma mark Search delegates
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+	return NO;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+	return NO;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	if ([[self.searchDisplayController searchBar].text length] <= 2) {
+		[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
+		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"SearchTooSmall", @"SearchTooSmall")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+		alert.tag = 2;
+		[alert show];
+		[alert release];
+	}
+	else
+		[webService searchForWords:[self.searchDisplayController searchBar].text];
 }
 
 #pragma mark -

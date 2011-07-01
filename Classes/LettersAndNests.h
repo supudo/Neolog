@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "WebService.h"
 
-@interface LettersAndNests : UITableViewController <WebServiceDelegate> {
+@interface LettersAndNests : UITableViewController <WebServiceDelegate, UISearchDisplayDelegate, UISearchBarDelegate> {
 	NSArray *nests;
 	UIView *headerNests, *headerLetters;
 	WebService *webService;
 	NSString *navTitle;
+	BOOL searchActive;
 }
 
 @property (nonatomic, retain) NSArray *nests;
 @property (nonatomic, retain) UIView *headerNests, *headerLetters;
 @property (nonatomic, retain) WebService *webService;
 @property (nonatomic, retain) NSString *navTitle;
+@property BOOL searchActive;
+
+- (void)toggleSearch;
 
 @end

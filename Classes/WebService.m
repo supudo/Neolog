@@ -201,6 +201,29 @@
 	[commentData release];
 }
 
+- (void)searchForWords:(NSString *)searchQuery {
+	self.OperationID = NLOperationSearch;
+	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
+	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Search URL call = %@?action=Search&q=%@", [nlSettings sharednlSettings].ServicesURL, [self.urlReader urlCryptedEncode:searchQuery]]];
+	if (self.urlReader == nil)
+		self.urlReader = [[URLReader alloc] init];
+	[self.urlReader setDelegate:self];
+	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteAllObjects:@"Word"];
+	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?action=Search&q=%@", [nlSettings sharednlSettings].ServicesURL, [self.urlReader urlCryptedEncode:searchQuery]] postData:@"" postMethod:@"GET"];
+	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Search response = %@", xmlData]];
+	if (xmlData.length > 0) {
+		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];
+		[myParser setDelegate:self];
+		[myParser setShouldProcessNamespaces:NO];
+		[myParser setShouldReportNamespacePrefixes:NO];
+		[myParser setShouldResolveExternalEntities:NO];
+		[myParser parse];
+		[myParser release];
+	}
+	else if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(searchForWordsNoResultsFinished :)])
+		[delegate searchForWordsNoResultsFinished:self];
+}
+
 #pragma mark -
 #pragma mark Events
 
@@ -240,6 +263,10 @@
 		dbWord *wrd = (dbWord *)[dbManagedObjectContext getEntity:@"Word" predicateString:[NSString stringWithFormat:@"WordID = %@", [attributeDict objectForKey:@"wid"]]];
 		[entWordComment setWord:wrd];
 	}
+	else if ([elementName isEqualToString:@"Search"] && [[attributeDict objectForKey:@"c"] intValue] == 0) {
+		if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(searchForWordsNoResultsFinished:)])
+			[delegate searchForWordsNoResultsFinished:self];
+	}
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
@@ -249,7 +276,7 @@
 	if (![[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
 		if ([currentElement isEqualToString:@"nn"])
 			[entNest setTitle:string];
-		else if ([currentElement isEqualToString:@"sendword"])
+		else if ([[currentElement lowercaseString] isEqualToString:@"sendword"])
 			[nlSettings sharednlSettings].currentSendWordResponse = [string boolValue];
 		// Content
 		else if ([currentElement isEqualToString:@"cnabout"])
@@ -319,6 +346,11 @@
 		case NLOperationSendComment: {
 			if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(sendCommentFinished:)])
 				[delegate sendCommentFinished:self];
+			break;
+		}
+		case NLOperationSearch: {
+			if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(searchForWordsFinished:)])
+				[delegate searchForWordsFinished:self];
 			break;
 		}
 		default:

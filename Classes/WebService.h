@@ -23,6 +23,8 @@
 - (void)fetchWordsForLetterFinished:(id)sender;
 - (void)fetchWordCommentsFinished:(id)sender;
 - (void)sendCommentFinished:(id)sender;
+- (void)searchForWordsFinished:(id)sender;
+- (void)searchForWordsNoResultsFinished:(id)sender;
 @end
 
 @interface WebService : NSObject <NSXMLParserDelegate, URLReaderDelegate> {
@@ -53,7 +55,8 @@ typedef enum NLServiceOperations {
 	NLOperationFetchWordsForNest,
 	NLOperationFetchWordsForLetter,
 	NLOperationFetchWordComments,
-	NLOperationSendComment
+	NLOperationSendComment,
+	NLOperationSearch
 } NLServiceOperations;
 
 - (void)getNests;
@@ -63,5 +66,6 @@ typedef enum NLServiceOperations {
 - (void)fetchWordsForLetter:(NSString *)letter;
 - (void)fetchWordComments:(int)wordID;
 - (void)sendComment:(int)wordID author:(NSString *)cAuthor comment:(NSString *)cComment;
+- (void)searchForWords:(NSString *)searchQuery;
 
 @end
