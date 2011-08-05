@@ -30,5 +30,7 @@
 "SearchTooSmall" = "Моля, въведете по-дълъг текст."; // Please, enter longer text
 "SearchNoResults" = "Нищо намерено.\nОпитайте с нещо друго..."; // Nothing found. Try with something else...
 "Twitter.LoginError" = "Грешно потребителско име и/или парола."; // Wrong username and/or password
+"Twitter.PublishOK" = "Чуруликането беше успешно"; // Tweeting was successfull.
+"Twitter.PublishError" = "Възникна проблем при чуруликането."; // A problem occured while tweeting
 "Facebook.PublishOK" = "Обяват беше публикувана на вашата стена."; // The message was posted on your wall
 "Facebook.PublishError" = "Възникна проблем при публикуване на вашата стена."; // An error occured while publishing on your wall
