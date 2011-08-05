@@ -18,6 +18,7 @@
 	CurrentWord *currentWord;
 	dbWord *currentDbWord;
 	NSArray *letters;
+	NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
 }
 
 @property BOOL inDebugMode, currentSendWordResponse, rememberPrivateData;
@@ -26,8 +27,9 @@
 @property (nonatomic, retain) CurrentWord *currentWord;
 @property (nonatomic, retain) dbWord *currentDbWord;
 @property (nonatomic, retain) NSArray *letters;
+@property (nonatomic, retain) NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
 
-- (void)LogThis: (NSString *)log;
+- (void)LogThis:(NSString *)log, ...;
 - (BOOL)connectedToInternet;
 
 + (nlSettings *)sharednlSettings;

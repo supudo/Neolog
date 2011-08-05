@@ -14,12 +14,20 @@
 
 @synthesize inDebugMode, currentSendWordResponse, rememberPrivateData, ServicesURL, BuildVersion;
 @synthesize currentWord, currentDbWord, letters, LocationLatitude, LocationLongtitude;
+@synthesize twitterOAuthConsumerKey, twitterOAuthConsumerSecret, facebookAppID, facebookAppSecret;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 
-- (void) LogThis: (NSString *)log {
-	if (self.inDebugMode)
-		NSLog(@"[_____Neolog-DEBUG] : %@", log);
+- (void)LogThis:(NSString *)log, ... {
+	if (self.inDebugMode) {
+		NSString *output;
+		va_list ap;
+		va_start(ap, log);
+		output = [[NSString alloc] initWithFormat:log arguments:ap];
+		va_end(ap);
+		NSLog(@"[_____Neolog-DEBUG] : %@", output);
+		[output release];
+	}
 }
 
 - (BOOL)connectedToInternet {
@@ -35,6 +43,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 	if (self = [super init]) {
 		self.inDebugMode = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NLInDebugMode"] boolValue];
 		self.currentSendWordResponse = FALSE;
+		
+		self.twitterOAuthConsumerKey = @"bpPhvYVczLnd2ZntLNbcQ";
+		self.twitterOAuthConsumerSecret = @"HbAvScLfdkAR9ZhW9j2LWQmWNk60J4lYHrxLOeXgQ";
+		self.facebookAppID = @"269046193111640";
+		self.facebookAppSecret = @"c0ed2cdb7c80b45ed8dd9d5acac99fff";
 
 		DBManagedObjectContext *dbManagedObjectContext = [DBManagedObjectContext sharedDBManagedObjectContext];
 		dbSetting *entPD = (dbSetting *)[dbManagedObjectContext getEntity:@"Setting" predicate:[NSPredicate predicateWithFormat:@"SName = %@", @"StorePrivateData"]];

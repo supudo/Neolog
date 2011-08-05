@@ -29,3 +29,6 @@
 "Search" = "Търсене"; // Search
 "SearchTooSmall" = "Моля, въведете по-дълъг текст."; // Please, enter longer text
 "SearchNoResults" = "Нищо намерено.\nОпитайте с нещо друго..."; // Nothing found. Try with something else...
+"Twitter.LoginError" = "Грешно потребителско име и/или парола."; // Wrong username and/or password
+"Facebook.PublishOK" = "Обяват беше публикувана на вашата стена."; // The message was posted on your wall
+"Facebook.PublishError" = "Възникна проблем при публикуване на вашата стена."; // An error occured while publishing on your wall

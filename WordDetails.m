@@ -9,6 +9,8 @@
 #import "WordDetails.h"
 #import "WordComments.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BlackAlertView.h"
+#import "SA_OAuthTwitterEngine.h"
 
 @implementation WordDetails
 
@@ -16,6 +18,7 @@
 @synthesize txtDescription, txtExample, txtEthimology;
 @synthesize contentView, scrollView;
 @synthesize btnComments;
+@synthesize _facebookEngine;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -23,6 +26,14 @@
 	self.lblLExample.text = NSLocalizedString(@"Example", @"Example");
 	self.lblLEthimology.text = NSLocalizedString(@"Ethimology", @"Ethimology");
 	[self.btnComments setTitle:NSLocalizedString(@"SeeComments", @"SeeComments") forState:UIControlStateNormal];
+	
+	_facebookEngine = [[Facebook alloc] initWithAppId:[nlSettings sharednlSettings].facebookAppID];
+	//https://developers.facebook.com/docs/guides/mobile/
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults objectForKey:@"FacebookAccessTokenKey"] && [defaults objectForKey:@"FacebookExpirationDateKey"]) {
+        _facebookEngine.accessToken = [defaults objectForKey:@"FacebookAccessTokenKey"];
+        _facebookEngine.expirationDate = [defaults objectForKey:@"FacebookExpirationDateKey"];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -155,6 +166,132 @@
 	[tvc release];
 }
 
+#pragma mark -
+#pragma mark Twitter
+
+- (IBAction)sendTwitter:(id)sender {
+	if (_twitterEngine)
+		return;
+	_twitterEngine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate: self];
+	_twitterEngine.consumerKey = [nlSettings sharednlSettings].twitterOAuthConsumerKey;
+	_twitterEngine.consumerSecret = [nlSettings sharednlSettings].twitterOAuthConsumerSecret;
+	UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_twitterEngine delegate:self];
+	if (controller) 
+		[self presentModalViewController:controller animated:YES];
+	else
+		[self twitterPost];
+}
+
+- (void)twitterPost {
+	NSMutableString *twitterMessage = [[NSMutableString alloc] init];
+	[twitterMessage setString:@"Neolog.bg - "];
+	[twitterMessage appendFormat:@"%@ : ", [nlSettings sharednlSettings].currentDbWord.Word];
+	[twitterMessage appendFormat:@"http://www.neolog.bg/word/%i", [[nlSettings sharednlSettings].currentDbWord.WordID intValue]];
+	[twitterMessage appendFormat:@" #neologbg"];
+	[_twitterEngine sendUpdate:twitterMessage];
+	[NSMutableString release];
+}
+
+- (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
+	[[nlSettings sharednlSettings] LogThis:@"Authenicated for %@", username];
+	[self twitterPost];
+}
+
+- (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
+	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.LoginError", @"Twitter.LoginError")] delegate:self cancelButtonTitle:NSLocalizedString(@"UI.OK", @"UI.OK") otherButtonTitles:nil];
+	alert.tag = 891;
+	[alert show];
+	[alert release];
+}
+
+- (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller {
+	[[nlSettings sharednlSettings] LogThis:@"Twitter Authentication Canceled."];
+}
+
+- (void)storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:data forKey:@"twitterAuthData"];
+	[defaults synchronize];
+}
+
+- (NSString *)cachedTwitterOAuthDataForUsername:(NSString *)username {
+	return [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthData"];
+}
+
+- (void)requestSucceeded: (NSString *) requestIdentifier {
+	[[nlSettings sharednlSettings] LogThis:@"Request %@ succeeded", requestIdentifier];
+}
+
+- (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error {
+	[[nlSettings sharednlSettings] LogThis:@"Request %@ failed with error: %@", requestIdentifier, error];
+}
+
+#pragma mark -
+#pragma mark Facebook
+
+- (IBAction)sendFacebook:(id)sender {
+	SBJSON *jsonWriter = [[SBJSON new] autorelease];
+	
+	NSDictionary *actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
+														   @"Neolog.bg", @"text", @"http://www.neolog.bg/", @"href", nil], nil];
+	NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+	
+	NSDictionary *attachment = [NSDictionary dictionaryWithObjectsAndKeys:
+								[nlSettings sharednlSettings].currentDbWord.Word, @"name",
+								[nlSettings sharednlSettings].currentDbWord.Example, @"caption",
+								[nlSettings sharednlSettings].currentDbWord.Description, @"description",
+								[NSString stringWithFormat:@"http://www.neolog.bg/word/%i", [[nlSettings sharednlSettings].currentDbWord.WordID intValue]], @"href",
+								nil];
+	NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
+	
+	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+								   @"Share on Facebook",  @"user_message_prompt",
+								   actionLinksStr, @"action_links",
+								   attachmentStr, @"attachment",
+								   nil];
+	
+	[_facebookEngine dialog:@"stream.publish" andParams:params andDelegate:self];
+}
+
+- (void)fbDidLogin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[_facebookEngine accessToken] forKey:@"FacebookAccessTokenKey"];
+    [defaults setObject:[_facebookEngine expirationDate] forKey:@"FacebookExpirationDateKey"];
+    [defaults synchronize];
+}
+
+- (void)dialogDidComplete:(FBDialog *)dialog {
+	[[nlSettings sharednlSettings] LogThis:@"Facebook publish successfull."];
+	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Facebook.PublishOK", @"Facebook.PublishOK")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	alert.tag = 791;
+	[alert show];
+	[alert release];
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	if ([result isKindOfClass:[NSArray class]])
+		result = [result objectAtIndex:0];
+	
+	if ([result objectForKey:@"owner"])
+		[[nlSettings sharednlSettings] LogThis:@"Facebook Photo upload Success"];
+	else
+		[[nlSettings sharednlSettings] LogThis:@"Facebook result : %@", [result objectForKey:@"name"]];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+	[[nlSettings sharednlSettings] LogThis:@"Facebook failed ... %@", [error localizedDescription]];
+	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"Facebook.PublishError", @"Facebook.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	alert.tag = 792;
+	[alert show];
+	[alert release];
+}
+
+#pragma mark -
+#pragma mark System
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
@@ -186,6 +323,10 @@
 	[scrollView release];
 	btnComments = nil;
 	[btnComments release];
+	_twitterEngine = nil;
+	[_twitterEngine release];
+	_facebookEngine = nil;
+	[_facebookEngine release];
     [super viewDidUnload];
 }
 
@@ -201,6 +342,9 @@
 	[contentView release];
 	[scrollView release];
 	[btnComments release];
+	[_twitterEngine release];
+	[_facebookEngine release];
+	[_fbButton release];
     [super dealloc];
 }
 

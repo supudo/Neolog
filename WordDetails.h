@@ -7,13 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+// Twitter
+#import "SA_OAuthTwitterController.h"
+// Facebook
+#import "FBConnect.h"
+#import "FBLoginButton.h"
 
-@interface WordDetails : UIViewController {
+@class SA_OAuthTwitterEngine;
+
+@interface WordDetails : UIViewController <SA_OAuthTwitterControllerDelegate, FBRequestDelegate, FBDialogDelegate, FBSessionDelegate> {
 	UILabel *lblWord, *lblAuthor, *lblURL, *lblLExample, *lblLEthimology;
 	UITextView *txtDescription, *txtExample, *txtEthimology;
 	UIView *contentView;
 	UIButton *btnComments;
 	UIScrollView *scrollView;
+	SA_OAuthTwitterEngine *_twitterEngine;
+	Facebook *_facebookEngine;
+	FBLoginButton *_fbButton, *btnFacebook;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *lblWord, *lblAuthor, *lblURL, *lblLExample, *lblLEthimology;
@@ -21,9 +31,13 @@
 @property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIButton *btnComments;
+@property (readonly) Facebook *_facebookEngine;
 
 - (void)doDesign;
 
-- (IBAction) iboComments:(id)sender;
+- (IBAction)iboComments:(id)sender;
+- (IBAction)sendFacebook:(id)sender;
+- (IBAction)sendTwitter:(id)sender;
+- (void)twitterPost;
 
 @end
