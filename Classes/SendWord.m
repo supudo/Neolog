@@ -185,10 +185,10 @@
 		
 		[accountData release];
 
-		if (self.webService == nil)
-			self.webService = [[WebService alloc] init];
-		[self.webService setDelegate:self];
-		[self.webService sendWord];
+		if (webService == nil)
+			webService = [[WebService alloc] init];
+		[webService setDelegate:self];
+		[webService sendWord];
 	}
 }
 

@@ -71,18 +71,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 		self.BuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 		self.LocationLatitude = 0.f;
 		self.LocationLongtitude = 0.f;
-		self.currentWord = [[CurrentWord alloc] init];
-		self.currentDbWord = nil;
-		self.letters = [[NSArray alloc] initWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ю", @"Я", nil];
+		self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ю", @"Я", nil];
 
-		NSArray *accountData = [[NSMutableArray alloc] initWithArray:[dbManagedObjectContext getEntities:@"AccountData" sortDescriptors:nil]];
+        NSArray *accountData = [dbManagedObjectContext getEntities:@"AccountData" sortDescriptors:nil];
 		if ([accountData count] > 0) {
 			self.currentWord.name = [[accountData objectAtIndex:0] valueForKey:@"Name"];
 			self.currentWord.email = [[accountData objectAtIndex:0] valueForKey:@"Email"];
 			self.currentWord.url = [[accountData objectAtIndex:0] valueForKey:@"URL"];
 			self.currentWord.nestID = [[[accountData objectAtIndex:0] valueForKey:@"NestID"] intValue];
 		}
-		[accountData release];
+		self.currentWord = [[[CurrentWord alloc] init] autorelease];
+		self.currentDbWord = nil;
 	}
 	return self;
 }

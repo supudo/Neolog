@@ -22,10 +22,10 @@
 	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
 	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteAllObjects:@"Nest"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"GetNests URL call = %@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=GetNests"]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=GetNests"] postData:@"" postMethod:@"GET"];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=GetNests"] postData:@"" postMethod:@"GET"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"GetNests response = %@", xmlData]];
 	if (xmlData.length > 0) {
 		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -43,23 +43,23 @@
 - (void)sendWord {
 	self.OperationID = NLOperationSendWord;
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"SendWord URL call = %@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=SendWord"]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
 
 	NSMutableString *wordData = [[NSMutableString alloc] init];
 	[wordData setString:@""];
-	[wordData appendFormat:@"added_by=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.name]];
-	[wordData appendFormat:@"&added_by_email=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.email]];
-	[wordData appendFormat:@"&added_by_url=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.url]];
-	[wordData appendFormat:@"&word=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.word]];
+	[wordData appendFormat:@"added_by=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.name]];
+	[wordData appendFormat:@"&added_by_email=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.email]];
+	[wordData appendFormat:@"&added_by_url=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.url]];
+	[wordData appendFormat:@"&word=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.word]];
 	[wordData appendFormat:@"&nest=%i", [nlSettings sharednlSettings].currentWord.nestID];
-	[wordData appendFormat:@"&word_desc=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.meaning]];
-	[wordData appendFormat:@"&example=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.example]];
-	[wordData appendFormat:@"&ethimology=%@", [self.urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.ethimology]];
+	[wordData appendFormat:@"&word_desc=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.meaning]];
+	[wordData appendFormat:@"&example=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.example]];
+	[wordData appendFormat:@"&ethimology=%@", [urlReader urlCryptedEncode:[nlSettings sharednlSettings].currentWord.ethimology]];
 
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"SendWord request data = %@", wordData]];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=SendWord"] postData:wordData postMethod:@"POST"];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=SendWord"] postData:wordData postMethod:@"POST"];
 
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"SendWord response = %@", xmlData]];
 	if (xmlData.length > 0) {
@@ -82,10 +82,10 @@
 	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
 	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteAllObjects:@"StaticContent"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"GetContent URL call = %@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=GetContent"]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=GetContent"] postData:@"" postMethod:@"GET"];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=GetContent"] postData:@"" postMethod:@"GET"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"GetContent response = %@", xmlData]];
 	if (xmlData.length > 0) {
 		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -104,11 +104,11 @@
 	self.OperationID = NLOperationFetchWordsForNest;
 	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"FetchWordsForNest URL call = %@?action=FetchWordsForNest&nestID=%i", [nlSettings sharednlSettings].ServicesURL, NestID]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
 	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteAllObjects:@"Word"];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?action=FetchWordsForNest&nestID=%i", [nlSettings sharednlSettings].ServicesURL, NestID] postData:@"" postMethod:@"GET"];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?action=FetchWordsForNest&nestID=%i", [nlSettings sharednlSettings].ServicesURL, NestID] postData:@"" postMethod:@"GET"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"FetchWordsForNest response = %@", xmlData]];
 	if (xmlData.length > 0) {
 		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -127,11 +127,11 @@
 	self.OperationID = NLOperationFetchWordsForLetter;
 	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"FetchWordsForLetter URL call = %@?action=FetchWordsForLetter&letter=%@", [nlSettings sharednlSettings].ServicesURL, letter]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
 	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteAllObjects:@"Word"];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?action=FetchWordsForLetter&letter=%@", [nlSettings sharednlSettings].ServicesURL, letter] postData:@"" postMethod:@"GET"];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?action=FetchWordsForLetter&letter=%@", [nlSettings sharednlSettings].ServicesURL, letter] postData:@"" postMethod:@"GET"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"FetchWordsForLetter response = %@", xmlData]];
 	if (xmlData.length > 0) {
 		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -150,11 +150,11 @@
 	self.OperationID = NLOperationFetchWordComments;
 	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"FetchWordComments URL call = %@?action=FetchWordComments&wordID=%i", [nlSettings sharednlSettings].ServicesURL, wordID]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
 	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteObjects:@"WordComment" predicate:[NSPredicate predicateWithFormat:@"WordID = %i", wordID]];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?action=FetchWordComments&wordID=%i", [nlSettings sharednlSettings].ServicesURL, wordID] postData:@"" postMethod:@"GET"];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?action=FetchWordComments&wordID=%i", [nlSettings sharednlSettings].ServicesURL, wordID] postData:@"" postMethod:@"GET"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"FetchWordComments response = %@", xmlData]];
 	if (xmlData.length > 0) {
 		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];
@@ -172,18 +172,18 @@
 - (void)sendComment:(int)wordID author:(NSString *)cAuthor comment:(NSString *)cComment {
 	self.OperationID = NLOperationSendComment;
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"SendComment URL call = %@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=SendComment"]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
 	
 	NSMutableString *commentData = [[NSMutableString alloc] init];
 	[commentData setString:@""];
 	[commentData appendFormat:@"w=%i", wordID];
-	[commentData appendFormat:@"&author=%@", [self.urlReader urlCryptedEncode:cAuthor]];
-	[commentData appendFormat:@"&comment=%@", [self.urlReader urlCryptedEncode:cComment]];
+	[commentData appendFormat:@"&author=%@", [urlReader urlCryptedEncode:cAuthor]];
+	[commentData appendFormat:@"&comment=%@", [urlReader urlCryptedEncode:cComment]];
 	
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"SendComment request data = %@", commentData]];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=SendComment"] postData:commentData postMethod:@"POST"];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?%@", [nlSettings sharednlSettings].ServicesURL, @"action=SendComment"] postData:commentData postMethod:@"POST"];
 	
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"SendComment response = %@", xmlData]];
 	if (xmlData.length > 0) {
@@ -204,12 +204,12 @@
 - (void)searchForWords:(NSString *)searchQuery {
 	self.OperationID = NLOperationSearch;
 	self.managedObjectContext = [[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext];
-	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Search URL call = %@?action=Search&q=%@", [nlSettings sharednlSettings].ServicesURL, [self.urlReader urlCryptedEncode:searchQuery]]];
-	if (self.urlReader == nil)
-		self.urlReader = [[URLReader alloc] init];
-	[self.urlReader setDelegate:self];
+	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Search URL call = %@?action=Search&q=%@", [nlSettings sharednlSettings].ServicesURL, [urlReader urlCryptedEncode:searchQuery]]];
+	if (urlReader == nil)
+		urlReader = [[URLReader alloc] init];
+	[urlReader setDelegate:self];
 	[[DBManagedObjectContext sharedDBManagedObjectContext] deleteAllObjects:@"Word"];
-	NSString *xmlData = [self.urlReader getFromURL:[NSString stringWithFormat:@"%@?action=Search&q=%@", [nlSettings sharednlSettings].ServicesURL, [self.urlReader urlCryptedEncode:searchQuery]] postData:@"" postMethod:@"GET"];
+	NSString *xmlData = [urlReader getFromURL:[NSString stringWithFormat:@"%@?action=Search&q=%@", [nlSettings sharednlSettings].ServicesURL, [urlReader urlCryptedEncode:searchQuery]] postData:@"" postMethod:@"GET"];
 	[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Search response = %@", xmlData]];
 	if (xmlData.length > 0) {
 		NSXMLParser *myParser = [[NSXMLParser alloc] initWithData:[xmlData dataUsingEncoding:NSUTF8StringEncoding]];

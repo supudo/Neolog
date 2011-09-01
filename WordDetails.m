@@ -189,7 +189,7 @@
 	[twitterMessage appendFormat:@"http://www.neolog.bg/word/%i", [[nlSettings sharednlSettings].currentDbWord.WordID intValue]];
 	[twitterMessage appendFormat:@" #neologbg"];
 	[_twitterEngine sendUpdate:twitterMessage];
-	[NSMutableString release];
+	[twitterMessage release];
 }
 
 - (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {

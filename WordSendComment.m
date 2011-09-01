@@ -18,9 +18,9 @@
 	self.navigationItem.title = [nlSettings sharednlSettings].currentDbWord.Word;
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(sendComment)] autorelease];
 	txtAuthor.text = [nlSettings sharednlSettings].currentWord.name;
-	if (self.webService == nil)
-		self.webService = [[WebService alloc] init];
-	[self.webService setDelegate:self];
+	if (webService == nil)
+		webService = [[WebService alloc] init];
+	[webService setDelegate:self];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

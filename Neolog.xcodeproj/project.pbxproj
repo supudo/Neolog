@@ -935,6 +935,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: SERGEY PETROV (J2EY2ENVV4)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -949,6 +950,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Neolog;
+				PROVISIONING_PROFILE = "F7C69BBA-3FA6-4FD0-8624-30156F3F1C4B";
 			};
 			name = Debug;
 		};
@@ -956,6 +958,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: SERGEY PETROV (J2EY2ENVV4)";
 				COPY_PHASE_STRIP = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -967,6 +970,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Neolog;
+				PROVISIONING_PROFILE = "F7C69BBA-3FA6-4FD0-8624-30156F3F1C4B";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
