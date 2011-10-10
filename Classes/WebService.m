@@ -8,6 +8,7 @@
 
 #import "WebService.h"
 #import "DBManagedObjectContext.h"
+#import "GTMNSString_HTML.h"
 
 @implementation WebService
 
@@ -285,7 +286,7 @@
 		else if ([currentElement isEqualToString:@"wnid"])
 			[entWord setNestID:[NSNumber numberWithInt:[string intValue]]];
 		else if ([currentElement isEqualToString:@"wwrd"])
-			[entWord setWord:string];
+			[entWord setWord:[string gtm_stringByUnescapingFromHTML]];
 		else if ([currentElement isEqualToString:@"wnm"])
 			[entWord setAddedBy:string];
 		else if ([currentElement isEqualToString:@"wem"])

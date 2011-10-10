@@ -40,7 +40,7 @@ static NSString *kCellIdentifier = @"identifWords";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+    return [nlSettings sharednlSettings].shouldRotate;
 }
 
 #pragma mark -
@@ -143,9 +143,9 @@ static NSString *kCellIdentifier = @"identifWords";
 
 - (void)dealloc {
 	[navTitle release];
-	[webService release];
+	//[webService release];
 	[fetchedResultsController release];
-	[entWord release];
+	//[entWord release];
     [super dealloc];
 }
 

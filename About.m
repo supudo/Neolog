@@ -56,7 +56,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
+	return [nlSettings sharednlSettings].shouldRotate;
 }
 
 - (void)didReceiveMemoryWarning {

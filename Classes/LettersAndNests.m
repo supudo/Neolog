@@ -221,7 +221,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 #pragma mark Memory management
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
+	return [nlSettings sharednlSettings].shouldRotate;
 }
 
 - (void)didReceiveMemoryWarning {

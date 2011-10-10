@@ -12,7 +12,7 @@
 #import "dbWord.h"
 
 @interface nlSettings : NSObject {
-	BOOL inDebugMode, currentSendWordResponse, rememberPrivateData;
+	BOOL inDebugMode, currentSendWordResponse, rememberPrivateData, shouldRotate;
 	NSString *ServicesURL, *BuildVersion;
 	float LocationLatitude, LocationLongtitude;
 	CurrentWord *currentWord;
@@ -21,7 +21,7 @@
 	NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
 }
 
-@property BOOL inDebugMode, currentSendWordResponse, rememberPrivateData;
+@property BOOL inDebugMode, currentSendWordResponse, rememberPrivateData, shouldRotate;
 @property (nonatomic, retain) NSString *ServicesURL, *BuildVersion;
 @property float LocationLatitude, LocationLongtitude;
 @property (nonatomic, retain) CurrentWord *currentWord;

@@ -12,7 +12,7 @@
 
 @implementation nlSettings
 
-@synthesize inDebugMode, currentSendWordResponse, rememberPrivateData, ServicesURL, BuildVersion;
+@synthesize inDebugMode, currentSendWordResponse, rememberPrivateData, ServicesURL, BuildVersion, shouldRotate;
 @synthesize currentWord, currentDbWord, letters, LocationLatitude, LocationLongtitude;
 @synthesize twitterOAuthConsumerKey, twitterOAuthConsumerSecret, facebookAppID, facebookAppSecret;
 
@@ -43,6 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 	if (self = [super init]) {
 		self.inDebugMode = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NLInDebugMode"] boolValue];
 		self.currentSendWordResponse = FALSE;
+        self.shouldRotate = FALSE;
 		
 		self.twitterOAuthConsumerKey = @"bpPhvYVczLnd2ZntLNbcQ";
 		self.twitterOAuthConsumerSecret = @"HbAvScLfdkAR9ZhW9j2LWQmWNk60J4lYHrxLOeXgQ";

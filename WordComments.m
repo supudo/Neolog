@@ -35,7 +35,7 @@ static NSString *kCellIdentifier = @"identifComments";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return [nlSettings sharednlSettings].shouldRotate;
 }
 
 - (void)addComment {
