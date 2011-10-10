@@ -32,7 +32,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NLInDebugMode</key>
-	<string>TRUE</string>
+	<true/>
 	<key>NLServicesURL</key>
 	<string>http://www.neolog.bg/service.php</string>
 	<key>NSMainNibFile</key>

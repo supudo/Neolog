@@ -71,7 +71,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 }
 
 + (SA_OAuthTwitterController *) controllerToEnterCredentialsWithTwitterEngine: (SA_OAuthTwitterEngine *) engine delegate: (id <SA_OAuthTwitterControllerDelegate>) delegate forOrientation: (UIInterfaceOrientation)theOrientation {
-	if (![self credentialEntryRequiredWithTwitterEngine: engine]) return nil;			//not needed
+//	if (![self credentialEntryRequiredWithTwitterEngine: engine]) return nil;			//not needed
 	
 	SA_OAuthTwitterController					*controller = [[[SA_OAuthTwitterController alloc] initWithEngine: engine andOrientation: theOrientation] autorelease];
 	
@@ -96,10 +96,17 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 		self.orientation = theOrientation;
 		_firstLoad = YES;
 		
-		if (UIInterfaceOrientationIsLandscape( self.orientation ) )
-			_webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 32, 480, 288)];
-		else
-			_webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 44, 320, 416)];
+        if (UI_USER_INTERFACE_IDIOM() ==  UIUserInterfaceIdiomPhone){
+            if (UIInterfaceOrientationIsLandscape( self.orientation ) )
+                _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 32, 480, 288)];
+            else
+                _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 44, 320, 416)];
+        }else{
+            if (UIInterfaceOrientationIsLandscape( self.orientation ) )
+                _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 32, 1024, 724)];
+            else
+                _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 44, 768, 950)];
+        }
 		
 		_webView.alpha = 0.0;
 		_webView.delegate = self;
@@ -108,7 +115,9 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 		if ([_webView respondsToSelector: @selector(setDataDetectorTypes:)]) [(id) _webView setDataDetectorTypes: 0];
 		
 		NSURLRequest			*request = _engine.authorizeURLRequest;
+		
 		[_webView loadRequest: request];
+        [[nlSettings sharednlSettings] LogThis:@"Twitter request %@", [_engine.authorizeURLRequest URL].absoluteString];
 
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(pasteboardChanged:) name: UIPasteboardChangedNotification object: nil];
 	}
@@ -139,18 +148,31 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 #pragma mark View Controller Stuff
 - (void) loadView {
 	[super loadView];
-
+    
 	_backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:kGGTwitterLoadingBackgroundImage]];
-	if ( UIInterfaceOrientationIsLandscape( self.orientation ) ) {
-		self.view = [[[UIView alloc] initWithFrame: CGRectMake(0, 0, 480, 288)] autorelease];	
-		_backgroundView.frame =  CGRectMake(0, 44, 480, 288);
-		
-		_navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 480, 32)] autorelease];
-	} else {
-		self.view = [[[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 416)] autorelease];	
-		_backgroundView.frame =  CGRectMake(0, 44, 320, 416);
-		_navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 320, 44)] autorelease];
-	}
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        if ( UIInterfaceOrientationIsLandscape( self.orientation ) ) {
+            self.view = [[[UIView alloc] initWithFrame: CGRectMake(0, 0, 480, 288)] autorelease];	
+            _backgroundView.frame =  CGRectMake(0, 44, 480, 288);
+            
+            _navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 480, 32)] autorelease];
+        } else {
+            self.view = [[[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 416)] autorelease];	
+            _backgroundView.frame =  CGRectMake(0, 10, 320, 416);
+            _navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 320, 44)] autorelease];
+        }
+    }else{
+        if ( UIInterfaceOrientationIsLandscape( self.orientation ) ) {
+            self.view = [[[UIView alloc] initWithFrame:CGRectMake(0, 44, 1024, 724)] autorelease];	
+            _backgroundView.frame =  CGRectMake(0, 44, 1024, 724);
+            _navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 1024, 32)] autorelease];
+        } else {
+            self.view = [[[UIView alloc] initWithFrame: CGRectMake(0, 0, 768, 950)] autorelease];	
+            _backgroundView.frame =  CGRectMake(0, 0, 768, 950);
+            _navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 768, 44)] autorelease];
+        }
+    }
+	
 	_navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	_backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -162,7 +184,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	
 	_blockerView = [[[UIView alloc] initWithFrame: CGRectMake(0, 0, 200, 60)] autorelease];
 	_blockerView.backgroundColor = [UIColor colorWithWhite: 0.0 alpha: 0.8];
-	_blockerView.center = CGPointMake(self.view.bounds.size.width / 2, self.view.bounds.size.height / 2);
+	_blockerView.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
 	_blockerView.alpha = 0.0;
 	_blockerView.clipsToBounds = YES;
 	if ([_blockerView.layer respondsToSelector: @selector(setCornerRadius:)]) [(id) _blockerView.layer setCornerRadius: 10];
@@ -187,6 +209,11 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	
 	[_navBar pushNavigationItem: navItem animated: NO];
 	[self locateAuthPinInWebView: nil];
+}
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    _navBar.tintColor = [UIColor blackColor];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -271,21 +298,33 @@ Ugly. I apologize for its inelegance. Bleah.
 *********************************************************************************************************/
 
 - (NSString *) locateAuthPinInWebView: (UIWebView *) webView {
-	// Look for either 'oauth-pin' or 'oauth_pin' in the raw HTML
-	NSString			*js = @"var d = document.getElementById('oauth-pin'); if (d == null) d = document.getElementById('oauth_pin'); if (d) d = d.innerHTML; d;";
-	NSString			*pin = [[webView stringByEvaluatingJavaScriptFromString: js] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//	NSString			*js = @"var d = document.getElementById('oauth-pin'); if (d == null) d = document.getElementById('oauth_pin'); if (d) d = d.innerHTML; if (d == null) {var r = new RegExp('\\\\s[0-9]+\\\\s'); d = r.exec(document.body.innerHTML); if (d.length > 0) d = d[0];} d.replace(/^\\s*/, '').replace(/\\s*$/, ''); d;";
+	NSString			*pin = nil;//[webView stringByEvaluatingJavaScriptFromString: js];
 	
-	if (pin.length == 7) {
-		return pin;
-	} else {
-		// New version of Twitter PIN page
-		js = @"var d = document.getElementById('oauth-pin'); if (d == null) d = document.getElementById('oauth_pin'); " \
-		"if (d) { var d2 = d.getElementsByTagName('code'); if (d2.length > 0) d2[0].innerHTML; }";
-		pin = [[webView stringByEvaluatingJavaScriptFromString: js] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-		
-		if (pin.length == 7) {
-			return pin;
-		}
+//	if (pin.length > 0) return pin;
+	
+	NSString			*html = [webView stringByEvaluatingJavaScriptFromString: @"document.body.innerText"];
+	
+	if (html.length == 0) return nil;
+	
+	const char			*rawHTML = (const char *) [html UTF8String];
+	int					length = strlen(rawHTML), chunkLength = 0;
+	
+	for (int i = 0; i < length; i++) {
+		if (rawHTML[i] < '0' || rawHTML[i] > '9') {
+			if (chunkLength == 7) {
+				char				*buffer = (char *) malloc(chunkLength + 1);
+				
+				memmove(buffer, &rawHTML[i - chunkLength], chunkLength);
+				buffer[chunkLength] = 0;
+				
+				pin = [NSString stringWithUTF8String: buffer];
+				free(buffer);
+				return pin;
+			}
+			chunkLength = 0;
+		} else
+			chunkLength++;
 	}
 	
 	return nil;
@@ -322,7 +361,7 @@ Ugly. I apologize for its inelegance. Bleah.
 //    NSString *dataSource = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
 //	
 //    if (dataSource == nil) {
-//        NSLog(@"An error occured while processing the jQueryInject file");
+//        DLog(@"An error occured while processing the jQueryInject file");
 //    }
 //	
 //	[_webView stringByEvaluatingJavaScriptFromString:dataSource]; //This line injects the jQuery to make it look better	
@@ -346,6 +385,7 @@ Ugly. I apologize for its inelegance. Bleah.
 		return NO;
 	}
 	if (navigationType != UIWebViewNavigationTypeOther) _webView.alpha = 0.1;
+    
 	return YES;
 }
 

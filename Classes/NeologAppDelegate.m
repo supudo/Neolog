@@ -25,7 +25,7 @@ NeologAppDelegate *appDelegate;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return [nlSettings sharednlSettings].shouldRotate;
+	return ((interfaceOrientation == UIInterfaceOrientationPortrait) ? YES : [nlSettings sharednlSettings].shouldRotate);
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {

@@ -175,6 +175,7 @@
 	if (!ticket.didSucceed || !data) return;
 	
 	NSString *dataString = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease];
+	
 	if (!dataString) return;
 	
 	[_requestToken release];
@@ -194,7 +195,7 @@
 	
 	NSString *dataString = [[[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding] autorelease];
 	if (!dataString) return;
-
+	
 	if (self.pin.length && [dataString rangeOfString: @"oauth_verifier"].location == NSNotFound) dataString = [dataString stringByAppendingFormat: @"&oauth_verifier=%@", self.pin];
 	
 	NSString				*username = [self extractUsernameFromHTTPBody:dataString];

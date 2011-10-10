@@ -1,5 +1,5 @@
 //
-//  OADataFetcher.h
+//  OAServiceTicket.m
 //  OAuthConsumer
 //
 //  Created by Jon Crosby on 11/5/07.
@@ -23,23 +23,29 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "OAMutableURLRequest.h"
+
 #import "OAServiceTicket.h"
 
 
-@interface OADataFetcher : NSObject {
-@private
-    OAMutableURLRequest *request;
-    NSURLResponse *response;
-    NSURLConnection *connection;
-    NSError *error;
-    NSData *responseData;
-    id delegate;
-    SEL didFinishSelector;
-    SEL didFailSelector;
+@implementation OAServiceTicket
+@synthesize request, response, didSucceed;
+
+- (id)initWithRequest:(OAMutableURLRequest *)aRequest response:(NSURLResponse *)aResponse didSucceed:(BOOL)success 
+{
+    if (self = [super init])
+	{
+		self.request = aRequest;
+		self.response = aResponse;
+		self.didSucceed = success;
+	}
+    return self;
 }
 
-- (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector;
+- (void)dealloc
+{
+	[request release];
+	[response release];
+	[super dealloc];
+}
 
 @end

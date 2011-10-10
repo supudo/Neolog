@@ -193,13 +193,13 @@
 }
 
 - (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
-	[[nlSettings sharednlSettings] LogThis:@"Authenicated for %@", username];
+	[[nlSettings sharednlSettings] LogThis:@"Twitter Authenicated for %@", username];
 	[self twitterPost];
 }
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.LoginError", @"Twitter.LoginError")] delegate:self cancelButtonTitle:NSLocalizedString(@"UI.OK", @"UI.OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.LoginError", @"Twitter.LoginError")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 891;
 	[alert show];
 	[alert release];
@@ -210,6 +210,7 @@
 }
 
 - (void)storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username {
+    [[nlSettings sharednlSettings] LogThis:@"Twitter Stored Auth for %@ - %@", username, data];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:data forKey:@"twitterAuthData"];
 	[defaults synchronize];
@@ -220,18 +221,18 @@
 }
 
 - (void)requestSucceeded: (NSString *) requestIdentifier {
-	[[nlSettings sharednlSettings] LogThis:@"Request %@ succeeded", requestIdentifier];
+	[[nlSettings sharednlSettings] LogThis:@"Twitter Request %@ succeeded", requestIdentifier];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.PublishOK", @"Twitter.PublishOK")] delegate:self cancelButtonTitle:NSLocalizedString(@"UI.OK", @"UI.OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.PublishOK", @"Twitter.PublishOK")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 899;
 	[alert show];
 	[alert release];
 }
 
 - (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error {
-	[[nlSettings sharednlSettings] LogThis:@"Request %@ failed with error: %@", requestIdentifier, [error localizedDescription]];
+	[[nlSettings sharednlSettings] LogThis:@"Twitter Request %@ failed with error: %@", requestIdentifier, [error localizedDescription]];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"Twitter.PublishError", @"Twitter.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:NSLocalizedString(@"UI.OK", @"UI.OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"Twitter.PublishError", @"Twitter.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 898;
 	[alert show];
 	[alert release];
