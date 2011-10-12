@@ -72,14 +72,19 @@ static NSString *kCellIdentifier = @"identifWords";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    dbWord *w = ((dbWord *)[fetchedResultsController objectAtIndexPath:indexPath]);
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier] autorelease];
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier] autorelease];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 		cell.textLabel.font = [UIFont fontWithName:@"Verdana" size:14.0];
+		cell.detailTextLabel.font = [UIFont fontWithName:@"Verdana" size:14.0];
 	}
-	cell.textLabel.text = ((dbWord *)[fetchedResultsController objectAtIndexPath:indexPath]).Word;
+	cell.textLabel.text = w.Word;
+    cell.detailTextLabel.text = @"";
+    if ([w.CommentCount intValue] > 0)
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"CommentsCount", @"CommentsCount"), w.CommentCount];
 	return cell;
 }
 

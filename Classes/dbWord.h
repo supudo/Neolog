@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSNumber * WordID;
 @property (nonatomic, retain) NSNumber * NestID;
+@property (nonatomic, retain) NSNumber * CommentCount;
 @property (nonatomic, retain) NSString * Example;
 @property (nonatomic, retain) NSString * Ethimology;
 @property (nonatomic, retain) NSString * AddedBy;

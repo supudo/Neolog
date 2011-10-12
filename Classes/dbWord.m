@@ -13,6 +13,7 @@
 
 @dynamic WordID;
 @dynamic NestID;
+@dynamic CommentCount;
 @dynamic Example;
 @dynamic Ethimology;
 @dynamic AddedBy;

@@ -299,6 +299,8 @@
 			[entWord setExample:string];
 		else if ([currentElement isEqualToString:@"wet"])
 			[entWord setEthimology:string];
+		else if ([currentElement isEqualToString:@"wcms"])
+			[entWord setCommentCount:[NSNumber numberWithInt:[string intValue]]];
 		// Word Comments
 		else if ([currentElement isEqualToString:@"wcau"])
 			[entWordComment setAuthor:string];

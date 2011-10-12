@@ -24,6 +24,7 @@
 "Letters" = "Букви"; // Nests
 "Bravo" = "Браво!"; // Bravo
 "GO" = "Газ!"; // Go
+"CommentsCount" = "Коментари"; // Comments
 "SendWord" = "Изпрати дума"; // Send word
 "SeeComments" = "Какво казват другите..."; // See what other people say
 "Search" = "Търсене"; // Search
