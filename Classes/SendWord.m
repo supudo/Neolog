@@ -23,8 +23,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	scrollView.contentSize = CGSizeMake(320, 650);
-	[self navigationController].navigationBar.topItem.title = NSLocalizedString(@"SendWord", @"SendWord");
-	[self.btnGaz setTitle:NSLocalizedString(@"GO", @"GO") forState:UIControlStateNormal];
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"OrderPos" ascending:YES];
 	NSArray *arrSorters = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
@@ -35,6 +33,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	[self navigationController].navigationBar.topItem.title = LocalizedString(@"SendWord", @"SendWord");
+	[self.btnGaz setTitle:LocalizedString(@"GO", @"GO") forState:UIControlStateNormal];
 
 	if (self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIDeviceOrientationPortraitUpsideDown)
 		contentView.frame = CGRectMake(0, 0, 320, 650);
@@ -62,6 +62,16 @@
 	[txtMeaning resignFirstResponder];
 	[txtExample resignFirstResponder];
 	[txtEthimology resignFirstResponder];
+    
+    lblName.text = LocalizedString(@"SWName", @"SWName");
+    lblEmail.text = LocalizedString(@"SWEmail", @"SWEmail");
+    lblURL.text = LocalizedString(@"SWURL", @"SWURL");
+    lblWord.text = LocalizedString(@"SWWord", @"SWWord");
+    lblNest.text = LocalizedString(@"SWNest", @"SWNest");
+    lblDescription.text = LocalizedString(@"SWDescription", @"SWDescription");
+    lblExample.text = LocalizedString(@"SWExample", @"SWExample");
+    lblEthimology.text = LocalizedString(@"SWEthimology", @"SWEthimology");
+    [self.btnNests setTitle:LocalizedString(@"SWNestChoose", @"SWNestChoose") forState:UIControlStateNormal];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -95,7 +105,7 @@
 }
 
 - (IBAction) iboNest:(id)sender {
-	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:@"Гнездо" delegate:self cancelButtonTitle:@"OK" destructiveButtonTitle:@"Нене..." otherButtonTitles:nil];
+	UIActionSheet *menu = [[UIActionSheet alloc] initWithTitle:LocalizedString(@"Nest", @"Nest") delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") destructiveButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:nil];
 	UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 185, 0, 0)];
 	pickerView.delegate = self;
 	pickerView.showsSelectionIndicator = YES;
@@ -159,9 +169,9 @@
 		[txtWord.text isEqualToString:@""] ||
 		[txtMeaning.text isEqualToString:@""] ||
 		[txtExample.text isEqualToString:@""]) {
-		NSString *msg = NSLocalizedString(@"MissingReqFields", @"MissingReqFields");
+		NSString *msg = LocalizedString(@"MissingReqFields", @"MissingReqFields");
 		[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles: nil];
+		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:msg delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles: nil];
 		alert.tag = 3;
 		[alert show];
 		[alert release];
@@ -203,11 +213,11 @@
 		[nlSettings sharednlSettings].currentWord.url = @"";
 	}
 
-	NSString *msg = NSLocalizedString(@"ThankYou", @"ThankYou");
+	NSString *msg = LocalizedString(@"ThankYou", @"ThankYou");
 	if (![nlSettings sharednlSettings].currentSendWordResponse)
-		msg = [NSString stringWithFormat:@"%@!", NSLocalizedString(@"Error", @"Error")];
+		msg = [NSString stringWithFormat:@"%@!", LocalizedString(@"Error", @"Error")];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:msg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles: nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:msg delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles: nil];
 	alert.tag = 2;
 	[alert show];
 	[alert release];
@@ -215,7 +225,7 @@
 
 - (void)serviceError:(id)sender error:(NSString *) errorMessage {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Error", @"Error"), errorMessage] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles: nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@: %@", LocalizedString(@"Error", @"Error"), errorMessage] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles: nil];
 	alert.tag = 1;
 	[alert show];
 	[alert release];

@@ -23,9 +23,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	self.navigationItem.title = [nlSettings sharednlSettings].currentDbWord.Word;
-	self.lblLExample.text = NSLocalizedString(@"Example", @"Example");
-	self.lblLEthimology.text = NSLocalizedString(@"Ethimology", @"Ethimology");
-	[self.btnComments setTitle:NSLocalizedString(@"SeeComments", @"SeeComments") forState:UIControlStateNormal];
 	
 	_facebookEngine = [[Facebook alloc] initWithAppId:[nlSettings sharednlSettings].facebookAppID];
 	//https://developers.facebook.com/docs/guides/mobile/
@@ -38,6 +35,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	self.lblLExample.text = LocalizedString(@"Example", @"Example");
+	self.lblLEthimology.text = LocalizedString(@"Ethimology", @"Ethimology");
+	[self.btnComments setTitle:LocalizedString(@"SeeComments", @"SeeComments") forState:UIControlStateNormal];
 
 	scrollView.contentSize = CGSizeMake(320, 691);
 
@@ -199,7 +199,7 @@
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.LoginError", @"Twitter.LoginError")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", LocalizedString(@"Twitter.LoginError", @"Twitter.LoginError")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 891;
 	[alert show];
 	[alert release];
@@ -223,7 +223,7 @@
 - (void)requestSucceeded: (NSString *) requestIdentifier {
 	[[nlSettings sharednlSettings] LogThis:@"Twitter Request %@ succeeded", requestIdentifier];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Twitter.PublishOK", @"Twitter.PublishOK")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", LocalizedString(@"Twitter.PublishOK", @"Twitter.PublishOK")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 899;
 	[alert show];
 	[alert release];
@@ -232,7 +232,7 @@
 - (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *)error {
 	[[nlSettings sharednlSettings] LogThis:@"Twitter Request %@ failed with error: %@", requestIdentifier, [error localizedDescription]];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"Twitter.PublishError", @"Twitter.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", LocalizedString(@"Twitter.PublishError", @"Twitter.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 898;
 	[alert show];
 	[alert release];
@@ -275,7 +275,7 @@
 - (void)dialogDidComplete:(FBDialog *)dialog {
 	[[nlSettings sharednlSettings] LogThis:@"Facebook publish successfull."];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", NSLocalizedString(@"Facebook.PublishOK", @"Facebook.PublishOK")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", LocalizedString(@"Facebook.PublishOK", @"Facebook.PublishOK")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 791;
 	[alert show];
 	[alert release];
@@ -294,7 +294,7 @@
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
 	[[nlSettings sharednlSettings] LogThis:@"Facebook failed ... %@", [error localizedDescription]];
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"Facebook.PublishError", @"Facebook.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@\n%@", LocalizedString(@"Facebook.PublishError", @"Facebook.PublishError"), [error localizedDescription]] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 792;
 	[alert show];
 	[alert release];

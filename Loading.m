@@ -40,7 +40,7 @@
 
 - (void)serviceError:(id)sender error:(NSString *) errorMessage {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Error", @"Error"), errorMessage] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles: nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@: %@", LocalizedString(@"Error", @"Error"), errorMessage] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles: nil];
 	[alert show];
 	[alert release];
 }

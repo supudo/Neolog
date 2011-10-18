@@ -13,7 +13,7 @@
 @implementation nlSettings
 
 @synthesize inDebugMode, currentSendWordResponse, rememberPrivateData, ServicesURL, BuildVersion, shouldRotate;
-@synthesize currentWord, currentDbWord, letters, LocationLatitude, LocationLongtitude;
+@synthesize currentWord, currentDbWord, letters, interfaceLanugages, LocationLatitude, LocationLongtitude;
 @synthesize twitterOAuthConsumerKey, twitterOAuthConsumerSecret, facebookAppID, facebookAppSecret;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
@@ -73,6 +73,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 		self.LocationLatitude = 0.f;
 		self.LocationLongtitude = 0.f;
 		self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Щ", @"Ъ", @"Ю", @"Я", nil];
+        self.interfaceLanugages = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"bg", @"Български", nil], nil];
+        [self.interfaceLanugages addObject:[NSArray arrayWithObjects:@"en", @"English", nil]];
 
         NSArray *accountData = [dbManagedObjectContext getEntities:@"AccountData" sortDescriptors:nil];
 		if ([accountData count] > 0) {
@@ -83,8 +85,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 		}
 		self.currentWord = [[[CurrentWord alloc] init] autorelease];
 		self.currentDbWord = nil;
+        
+        NSString *currentLang = [self getLanguage];
+        if (currentLang == nil || [currentLang isEqualToString:@""])
+            [self setLanguage:@"bg"];
+
+        int i = 0;
+        NSString *l;
+        for (UIViewController *v in appDelegate.tabBarController.viewControllers) {
+            l = [NSString stringWithFormat:@"Tabbar_%i", i];
+            v.tabBarItem.title = LocalizedString(l, l);
+            i++;
+        }
 	}
 	return self;
+}
+
+- (void)setLanguage:(NSString *)lang {
+    [[NSUserDefaults standardUserDefaults] setObject:lang forKey:@"SelectedLanguage"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)getLanguage {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedLanguage"];
+}
+
+- (NSString *)getTranslation:(NSString *)note {
+    NSString *slang = [self getLanguage];
+    NSString *lnote = [NSString stringWithFormat:@"%@_%@", slang, note];
+    return NSLocalizedString(lnote, lnote);
 }
 
 @end

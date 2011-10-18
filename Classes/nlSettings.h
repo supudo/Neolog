@@ -6,6 +6,8 @@
 //  Copyright 2011 neolog.bg. All rights reserved.
 //
 
+#define LocalizedString(n, m) [[nlSettings sharednlSettings] getTranslation:n]
+
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
 #import "CurrentWord.h"
@@ -18,6 +20,7 @@
 	CurrentWord *currentWord;
 	dbWord *currentDbWord;
 	NSArray *letters;
+    NSMutableArray *interfaceLanugages;
 	NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
 }
 
@@ -27,10 +30,14 @@
 @property (nonatomic, retain) CurrentWord *currentWord;
 @property (nonatomic, retain) dbWord *currentDbWord;
 @property (nonatomic, retain) NSArray *letters;
+@property (nonatomic, retain) NSMutableArray *interfaceLanugages;
 @property (nonatomic, retain) NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
 
 - (void)LogThis:(NSString *)log, ...;
 - (BOOL)connectedToInternet;
+- (void)setLanguage:(NSString *)lang;
+- (NSString *)getLanguage;
+- (NSString *)getTranslation:(NSString *)note;
 
 + (nlSettings *)sharednlSettings;
 

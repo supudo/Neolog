@@ -48,7 +48,7 @@ static NSString *kCellIdentifier = @"identifWords";
 
 - (void)serviceError:(id)sender error:(NSString *)errorMessage {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:NSLocalizedString(@"NONO", @"NONO") otherButtonTitles:NSLocalizedString(@"OK", @"OK"), nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 	[alert show];
 	[alert release];
 }
@@ -84,7 +84,7 @@ static NSString *kCellIdentifier = @"identifWords";
 	cell.textLabel.text = w.Word;
     cell.detailTextLabel.text = @"";
     if ([w.CommentCount intValue] > 0)
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"CommentsCount", @"CommentsCount"), w.CommentCount];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", LocalizedString(@"CommentsCount", @"CommentsCount"), w.CommentCount];
 	return cell;
 }
 

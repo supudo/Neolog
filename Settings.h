@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Settings : UIViewController {
+@interface Settings : UIViewController <UIActionSheetDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
 	UISwitch *swPrivateData;
 	UILabel *lblPrivateData;
+    UIButton *btnLang, *btnAbout;
+    int selectedLanguage;
 }
 
 @property (nonatomic, retain) IBOutlet UISwitch *swPrivateData;
 @property (nonatomic, retain) IBOutlet UILabel *lblPrivateData;
+@property (nonatomic, retain) IBOutlet UIButton *btnLang, *btnAbout;
+@property int selectedLanguage;
 
 - (IBAction) iboPriveData:(id)sender;
+- (IBAction) iboChangeLanguage:(id)sender;
 - (IBAction) iboAbout:(id)sender;
+- (void) setLanguageResources;
 
 @end

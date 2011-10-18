@@ -20,12 +20,12 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.navigationItem.title = NSLocalizedString(@"Choose", @"Choose");
 	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(toggleSearch)] autorelease];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	self.navigationItem.title = LocalizedString(@"Choose", @"Choose");
 
 	if (webService == nil)
 		webService = [[WebService alloc] init];
@@ -39,6 +39,10 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	[sortDescriptor release];
 	nests = [[NSArray alloc] initWithArray:[[DBManagedObjectContext sharedDBManagedObjectContext] getEntities:@"Nest" sortDescriptors:arrSorters]];
 	[arrSorters release];
+    
+    self.headerNests = nil;
+    self.headerLetters = nil;
+    [self.tableView reloadData];
 }
 
 - (void)toggleSearch {
@@ -97,7 +101,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 		cell.textLabel.text = ((dbNest *)[nests objectAtIndex:indexPath.row]).Title;
 	else {
 		if (indexPath.row >= [[nlSettings sharednlSettings].letters count])
-			cell.textLabel.text = @"др.";
+			cell.textLabel.text = LocalizedString(@"l_dr", @"l_dr");
 		else
 			cell.textLabel.text = [[nlSettings sharednlSettings].letters objectAtIndex:indexPath.row];
 	}
@@ -129,7 +133,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	if (headerNests == nil) {
 		headerNests  = [[UIView alloc] init];
 		UILabel *lblTitle = [[UILabel alloc] init];
-		[lblTitle setText:NSLocalizedString(@"Nests", @"Nests")];
+		[lblTitle setText:LocalizedString(@"Nests", @"Nests")];
 		[lblTitle setBackgroundColor:[UIColor clearColor]];
 		[lblTitle setTextColor:[UIColor whiteColor]];
 		[lblTitle setFont:[UIFont fontWithName:@"Verdana-Bold" size:22.0]];
@@ -140,7 +144,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	if (headerLetters == nil) {
 		headerLetters  = [[UIView alloc] init];
 		UILabel *lblTitle = [[UILabel alloc] init];
-		[lblTitle setText:NSLocalizedString(@"Letters", @"Letters")];
+		[lblTitle setText:LocalizedString(@"Letters", @"Letters")];
 		[lblTitle setBackgroundColor:[UIColor clearColor]];
 		[lblTitle setTextColor:[UIColor whiteColor]];
 		[lblTitle setFont:[UIFont fontWithName:@"Verdana-Bold" size:22.0]];
@@ -159,7 +163,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 
 - (void)serviceError:(id)sender error:(NSString *)errorMessage {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:NSLocalizedString(@"NONO", @"NONO") otherButtonTitles:NSLocalizedString(@"OK", @"OK"), nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 	alert.tag = 1;
 	[alert show];
 	[alert release];
@@ -181,14 +185,14 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 
 - (void)searchForWordsFinished:(id)sender {
 	Words *tvc = [[Words alloc] initWithNibName:@"Words" bundle:nil];
-	tvc.navTitle = NSLocalizedString(@"Search", @"Search");
+	tvc.navTitle = LocalizedString(@"Search", @"Search");
 	[[self navigationController] pushViewController:tvc animated:YES];
 	[tvc release];
 }
 
 - (void)searchForWordsNoResultsFinished:(id)sender {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"SearchNoResults", @"SearchNoResults")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"SearchNoResults", @"SearchNoResults")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 3;
 	[alert show];
 	[alert release];
@@ -208,7 +212,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	if ([[self.searchDisplayController searchBar].text length] <= 2) {
 		[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", NSLocalizedString(@"SearchTooSmall", @"SearchTooSmall")] delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"SearchTooSmall", @"SearchTooSmall")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 		alert.tag = 2;
 		[alert show];
 		[alert release];

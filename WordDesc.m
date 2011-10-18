@@ -15,15 +15,15 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.descID == 1) {
-		self.navigationItem.title = NSLocalizedString(@"Description", @"Description");
+		self.navigationItem.title = LocalizedString(@"Description", @"Description");
 		txtDesc.text = [nlSettings sharednlSettings].currentWord.meaning;
 	}
 	else if (self.descID == 2) {
-		self.navigationItem.title = NSLocalizedString(@"Example", @"Example");
+		self.navigationItem.title = LocalizedString(@"Example", @"Example");
 		txtDesc.text = [nlSettings sharednlSettings].currentWord.example;
 	}
 	else if (self.descID == 3) {
-		self.navigationItem.title = NSLocalizedString(@"Ethimology", @"Ethimology");
+		self.navigationItem.title = LocalizedString(@"Ethimology", @"Ethimology");
 		txtDesc.text = [nlSettings sharednlSettings].currentWord.ethimology;
 	}
 }

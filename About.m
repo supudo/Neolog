@@ -39,7 +39,7 @@
 	if (alreadyLoaded) {
 		self.clickedURL = [request URL];
 		[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
-		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"ExternalURLWarning", @"ExternalURLWarning") delegate:self cancelButtonTitle:NSLocalizedString(@"NONO", @"NONO") otherButtonTitles:NSLocalizedString(@"OK", @"OK"), nil];
+		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:LocalizedString(@"ExternalURLWarning", @"ExternalURLWarning") delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 		[alert show];
 		[alert release];
 		return NO;
