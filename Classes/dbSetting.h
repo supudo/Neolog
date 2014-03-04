@@ -13,8 +13,8 @@
 {
 }
 
-@property (nonatomic, retain) NSString * SName;
-@property (nonatomic, retain) NSString * SValue;
+@property (nonatomic, strong) NSString * SName;
+@property (nonatomic, strong) NSString * SValue;
 
 @end
 

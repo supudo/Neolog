@@ -33,14 +33,10 @@ static NSString *kCellIdentifier = @"identifWords";
 
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error]) {
-		[[nlSettings sharednlSettings] LogThis: [NSString stringWithFormat:@"Unresolved error %@, %@", error, [error userInfo]]];
+		[[nlSettings sharedInstance] LogThis: [NSString stringWithFormat:@"Unresolved error %@, %@", error, [error userInfo]]];
 		abort();
 	}
 	[self.tableView reloadData];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return [nlSettings sharednlSettings].shouldRotate;
 }
 
 #pragma mark -
@@ -50,13 +46,11 @@ static NSString *kCellIdentifier = @"identifWords";
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 	[alert show];
-	[alert release];
 }
 
 - (void)fetchWordCommentsFinished:(id)sender {
 	WordDetails *tvc = [[WordDetails alloc] initWithNibName:@"WordDetails" bundle:nil];
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 #pragma mark -
@@ -75,7 +69,7 @@ static NSString *kCellIdentifier = @"identifWords";
     dbWord *w = ((dbWord *)[fetchedResultsController objectAtIndexPath:indexPath]);
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kCellIdentifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 		cell.textLabel.font = [UIFont fontWithName:@"Verdana" size:14.0];
@@ -90,7 +84,7 @@ static NSString *kCellIdentifier = @"identifWords";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	entWord = (dbWord *)[fetchedResultsController objectAtIndexPath:indexPath];
-	[nlSettings sharednlSettings].currentDbWord = entWord;
+	[nlSettings sharedInstance].currentDbWord = entWord;
 	[webService fetchWordComments:[entWord.WordID intValue]];
 }
 
@@ -112,10 +106,6 @@ static NSString *kCellIdentifier = @"identifWords";
         aFetchedResultsController.delegate = self;
         self.fetchedResultsController = aFetchedResultsController;
         
-        [aFetchedResultsController release];
-        [fetchRequest release];
-        [sortDescriptor release];
-        [sortDescriptors release];
     }
 	return fetchedResultsController;
 }
@@ -136,23 +126,12 @@ static NSString *kCellIdentifier = @"identifWords";
 
 - (void)viewDidUnload {
 	navTitle = nil;
-	[navTitle release];
 	webService = nil;
-	[webService release];
 	fetchedResultsController = nil;
-	[fetchedResultsController release];
 	entWord = nil;
-	[entWord release];
 	[super viewDidUnload];
 }
 
-- (void)dealloc {
-	[navTitle release];
-	//[webService release];
-	[fetchedResultsController release];
-	//[entWord release];
-    [super dealloc];
-}
 
 @end
 

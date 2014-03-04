@@ -15,9 +15,9 @@
 	WebService *webService;
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *txtAuthor;
-@property (nonatomic, retain) IBOutlet UITextView *txtComment;
-@property (nonatomic, retain) WebService *webService;
+@property (nonatomic, strong) IBOutlet UITextField *txtAuthor;
+@property (nonatomic, strong) IBOutlet UITextView *txtComment;
+@property (nonatomic, strong) WebService *webService;
 
 - (void)sendComment;
 

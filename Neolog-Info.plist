@@ -8,13 +8,10 @@
 	<string>Neolog</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Icon.png</string>
-		<string>Icon@2x.png</string>
-	</array>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.supudo.net.apps.Neolog</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,14 +25,14 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.1</string>
+	<string>1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NLInDebugMode</key>
-	<true/>
 	<key>NLServicesURL</key>
-	<string>http://www.neolog.bg/service.php</string>
+	<string>http://neolog.eenk.com/service.php</string>
 	<key>NSMainNibFile</key>
+	<string>MainWindow</string>
+	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

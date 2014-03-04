@@ -20,13 +20,13 @@
 	int nestRow;
 }
 
-@property (nonatomic, retain) WebService *webService;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UIView *contentView;
-@property (nonatomic, retain) IBOutlet UITextField *txtName, *txtEmail, *txtURL, *txtWord, *txtMeaning, *txtExample, *txtEthimology;
-@property (nonatomic, retain) IBOutlet UIButton *btnNests, *btnGaz;
-@property (nonatomic, retain) IBOutlet UILabel *lblName, *lblEmail, *lblURL, *lblWord, *lblNest, *lblDescription, *lblExample, *lblEthimology;
-@property (nonatomic, retain) NSArray *nests;
+@property (nonatomic, strong) WebService *webService;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIView *contentView;
+@property (nonatomic, strong) IBOutlet UITextField *txtName, *txtEmail, *txtURL, *txtWord, *txtMeaning, *txtExample, *txtEthimology;
+@property (nonatomic, strong) IBOutlet UIButton *btnNests, *btnGaz;
+@property (nonatomic, strong) IBOutlet UILabel *lblName, *lblEmail, *lblURL, *lblWord, *lblNest, *lblDescription, *lblExample, *lblEthimology;
+@property (nonatomic, strong) NSArray *nests;
 @property int nestRow;
 
 - (IBAction) iboNest:(id)sender;

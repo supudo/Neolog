@@ -6,17 +6,24 @@
 //  Copyright 2011 neolog.bg. All rights reserved.
 //
 
+#import "nlSettings.h"
 #import "Reachability.h"
 #import "DBManagedObjectContext.h"
 #import "dbSetting.h"
 
 @implementation nlSettings
 
-@synthesize inDebugMode, currentSendWordResponse, rememberPrivateData, ServicesURL, BuildVersion, shouldRotate;
+@synthesize inDebugMode, currentSendWordResponse, rememberPrivateData, ServicesURL, BuildVersion;
 @synthesize currentWord, currentDbWord, letters, interfaceLanugages, LocationLatitude, LocationLongtitude;
-@synthesize twitterOAuthConsumerKey, twitterOAuthConsumerSecret, facebookAppID, facebookAppSecret;
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
++ (nlSettings *)sharedInstance {
+    static dispatch_once_t once;
+    static nlSettings * sharedInstance;
+    dispatch_once(&once, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
 
 - (void)LogThis:(NSString *)log, ... {
 	if (self.inDebugMode) {
@@ -26,7 +33,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 		output = [[NSString alloc] initWithFormat:log arguments:ap];
 		va_end(ap);
 		NSLog(@"[_____Neolog-DEBUG] : %@", output);
-		[output release];
 	}
 }
 
@@ -41,14 +47,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 
 - (id) init {
 	if (self = [super init]) {
-		self.inDebugMode = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NLInDebugMode"] boolValue];
+#if (TARGET_IPHONE_SIMULATOR)
+        self.inDebugMode = YES;
+#else
+        self.inDebugMode = NO;
+#endif
 		self.currentSendWordResponse = FALSE;
-        self.shouldRotate = FALSE;
-		
-		self.twitterOAuthConsumerKey = @"bpPhvYVczLnd2ZntLNbcQ";
-		self.twitterOAuthConsumerSecret = @"HbAvScLfdkAR9ZhW9j2LWQmWNk60J4lYHrxLOeXgQ";
-		self.facebookAppID = @"269046193111640";
-		self.facebookAppSecret = @"c0ed2cdb7c80b45ed8dd9d5acac99fff";
 
 		DBManagedObjectContext *dbManagedObjectContext = [DBManagedObjectContext sharedDBManagedObjectContext];
 		dbSetting *entPD = (dbSetting *)[dbManagedObjectContext getEntity:@"Setting" predicate:[NSPredicate predicateWithFormat:@"SName = %@", @"StorePrivateData"]];
@@ -62,7 +66,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 			
 			NSError *error = nil;
 			if (![[[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext] save:&error]) {
-				[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Error while saving the account info: %@", [error userInfo]]];
+				[[nlSettings sharedInstance] LogThis:@"Error while saving the account info: %@", [error userInfo]];
 				abort();
 			}
 			self.rememberPrivateData = TRUE;
@@ -83,7 +87,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
 			self.currentWord.url = [[accountData objectAtIndex:0] valueForKey:@"URL"];
 			self.currentWord.nestID = [[[accountData objectAtIndex:0] valueForKey:@"NestID"] intValue];
 		}
-		self.currentWord = [[[CurrentWord alloc] init] autorelease];
+		self.currentWord = [[CurrentWord alloc] init];
 		self.currentDbWord = nil;
         
         NSString *currentLang = [self getLanguage];
@@ -91,10 +95,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(nlSettings);
             [self setLanguage:@"bg"];
 
         int i = 0;
-        NSString *l;
+        NSString *l = @"";
         for (UIViewController *v in appDelegate.tabBarController.viewControllers) {
             l = [NSString stringWithFormat:@"Tabbar_%i", i];
-            v.tabBarItem.title = LocalizedString(l, l);
+            NSLog(@"%@ = %@", l, [self getTranslation:l]);
+            v.tabBarItem.title = [self getTranslation:l];
             i++;
         }
 	}

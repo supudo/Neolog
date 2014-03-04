@@ -15,9 +15,9 @@
     int selectedLanguage;
 }
 
-@property (nonatomic, retain) IBOutlet UISwitch *swPrivateData;
-@property (nonatomic, retain) IBOutlet UILabel *lblPrivateData;
-@property (nonatomic, retain) IBOutlet UIButton *btnLang, *btnAbout;
+@property (nonatomic, strong) IBOutlet UISwitch *swPrivateData;
+@property (nonatomic, strong) IBOutlet UILabel *lblPrivateData;
+@property (nonatomic, strong) IBOutlet UIButton *btnLang, *btnAbout;
 @property int selectedLanguage;
 
 - (IBAction) iboPriveData:(id)sender;

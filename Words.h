@@ -17,9 +17,9 @@
 	dbWord *entWord;
 }
 
-@property (nonatomic, retain) NSString *navTitle;
-@property (nonatomic, retain) WebService *webService;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) dbWord *entWord;
+@property (nonatomic, strong) NSString *navTitle;
+@property (nonatomic, strong) WebService *webService;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) dbWord *entWord;
 
 @end

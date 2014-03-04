@@ -17,10 +17,10 @@
 	BOOL searchActive;
 }
 
-@property (nonatomic, retain) NSArray *nests;
-@property (nonatomic, retain) UIView *headerNests, *headerLetters;
-@property (nonatomic, retain) WebService *webService;
-@property (nonatomic, retain) NSString *navTitle;
+@property (nonatomic, strong) NSArray *nests;
+@property (nonatomic, strong) UIView *headerNests, *headerLetters;
+@property (nonatomic, strong) WebService *webService;
+@property (nonatomic, strong) NSString *navTitle;
 @property BOOL searchActive;
 
 - (void)toggleSearch;

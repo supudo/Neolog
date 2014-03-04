@@ -12,7 +12,7 @@
 	UITextView *txtComment;
 }
 
-@property (nonatomic, retain) IBOutlet UITextView *txtComment;
+@property (nonatomic, strong) IBOutlet UITextView *txtComment;
 
 - (void)setComment:(NSString *)comm;
 

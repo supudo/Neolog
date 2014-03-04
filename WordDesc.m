@@ -16,15 +16,15 @@
 	[super viewWillAppear:animated];
 	if (self.descID == 1) {
 		self.navigationItem.title = LocalizedString(@"Description", @"Description");
-		txtDesc.text = [nlSettings sharednlSettings].currentWord.meaning;
+		txtDesc.text = [nlSettings sharedInstance].currentWord.meaning;
 	}
 	else if (self.descID == 2) {
 		self.navigationItem.title = LocalizedString(@"Example", @"Example");
-		txtDesc.text = [nlSettings sharednlSettings].currentWord.example;
+		txtDesc.text = [nlSettings sharedInstance].currentWord.example;
 	}
 	else if (self.descID == 3) {
 		self.navigationItem.title = LocalizedString(@"Ethimology", @"Ethimology");
-		txtDesc.text = [nlSettings sharednlSettings].currentWord.ethimology;
+		txtDesc.text = [nlSettings sharedInstance].currentWord.ethimology;
 	}
 }
 
@@ -32,15 +32,11 @@
 	[super viewWillDisappear:animated];
 	[txtDesc resignFirstResponder];
 	if (self.descID == 1)
-		[nlSettings sharednlSettings].currentWord.meaning = txtDesc.text;
+		[nlSettings sharedInstance].currentWord.meaning = txtDesc.text;
 	else if (self.descID == 2)
-		[nlSettings sharednlSettings].currentWord.example = txtDesc.text;
+		[nlSettings sharedInstance].currentWord.example = txtDesc.text;
 	else if (self.descID == 3)
-		[nlSettings sharednlSettings].currentWord.ethimology = txtDesc.text;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return [nlSettings sharednlSettings].shouldRotate;
+		[nlSettings sharedInstance].currentWord.ethimology = txtDesc.text;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,13 +45,8 @@
 
 - (void)viewDidUnload {
 	txtDesc = nil;
-	[txtDesc release];
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-	[txtDesc release];
-    [super dealloc];
-}
 
 @end

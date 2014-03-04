@@ -10,7 +10,14 @@
 
 @implementation DBManagedObjectContext
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
++ (DBManagedObjectContext *)sharedDBManagedObjectContext {
+    static dispatch_once_t once;
+    static DBManagedObjectContext *sharedDBManagedObjectContext;
+    dispatch_once(&once, ^{
+        sharedDBManagedObjectContext = [[self alloc] init];
+    });
+    return sharedDBManagedObjectContext;
+}
 
 - (NSManagedObject *)getEntity:(NSString *) entityName predicateString:(NSString *) predicateString {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -20,7 +27,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setPredicate:predicate];
 	NSError *error = nil;
 	NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	if ([items count] > 0)
 		return [items objectAtIndex:0];
 	else
@@ -34,7 +40,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setPredicate:predicate];
 	NSError *error = nil;
 	NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	if ([items count] > 0)
 		return [items objectAtIndex:0];
 	else
@@ -48,7 +53,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setPredicate:predicate];
 	NSError *error = nil;
 	NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	if ([items count] > 0)
 		return items;
 	else
@@ -63,7 +67,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setSortDescriptors: sortDescriptors];
 	NSError *error = nil;
 	NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	if ([items count] > 0)
 		return items;
 	else
@@ -77,7 +80,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setSortDescriptors: sortDescriptors];
 	NSError *error = nil;
 	NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	if ([items count] > 0)
 		return items;
 	else
@@ -90,7 +92,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setEntity:entity];
 	NSError *error = nil;
 	NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
 	if ([items count] > 0)
 		return items;
 	else
@@ -103,7 +104,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
     [fetchRequest setEntity:entity];
     NSError *error = nil;
     NSArray *items = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    [fetchRequest release];
 	
     for (NSManagedObject *managedObject in items)
         [managedObjectContext deleteObject:managedObject];
@@ -120,7 +120,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	[fetchRequest setPredicate:predicate];
     NSError *error = nil;
     NSArray *items = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    [fetchRequest release];
 	
 	for (NSManagedObject *managedObject in items)
 		[managedObjectContext deleteObject:managedObject];
@@ -133,12 +132,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc {
-    [managedObjectContext release];
-    [managedObjectModel release];
-    [persistentStoreCoordinator release];
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Core Data stack
@@ -158,7 +151,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 - (NSManagedObjectModel *)managedObjectModel {
 	if (managedObjectModel != nil)
 		return managedObjectModel;
-	managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];
+	managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
 	return managedObjectModel;
 }
 
@@ -176,11 +169,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DBManagedObjectContext);
 	
 	NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
 	
+    NSDictionary *storeOptions = @{ NSSQLitePragmasOption : @{ @"journal_mode" : @"DELETE" } };
 	NSError *error = nil;
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:storeOptions error:&error]) {
 		[[NSFileManager defaultManager] removeItemAtURL:storeUrl error:nil];
-		if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error])
+		if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:storeOptions error:&error])
 			abort();
     }    
     return persistentStoreCoordinator;

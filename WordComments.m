@@ -19,29 +19,24 @@ static NSString *kCellIdentifier = @"identifComments";
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.navigationItem.title = [nlSettings sharednlSettings].currentDbWord.Word;
+	self.navigationItem.title = [nlSettings sharedInstance].currentDbWord.Word;
 
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addComment)] autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addComment)];
 
 	NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
 	[self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
 	
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error]) {
-		[[nlSettings sharednlSettings] LogThis: [NSString stringWithFormat:@"Unresolved error %@, %@", error, [error userInfo]]];
+		[[nlSettings sharedInstance] LogThis: [NSString stringWithFormat:@"Unresolved error %@, %@", error, [error userInfo]]];
 		abort();
 	}
 	[self.tableView reloadData];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return [nlSettings sharednlSettings].shouldRotate;
-}
-
 - (void)addComment {
 	WordSendComment *tvc = [[WordSendComment alloc] initWithNibName:@"WordSendComment" bundle:nil];
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 #pragma mark -
@@ -71,7 +66,6 @@ static NSString *kCellIdentifier = @"identifComments";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	WordSendComment *tvc = [[WordSendComment alloc] initWithNibName:@"WordSendComment" bundle:nil];
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,10 +97,6 @@ static NSString *kCellIdentifier = @"identifComments";
         aFetchedResultsController.delegate = self;
         self.fetchedResultsController = aFetchedResultsController;
         
-        [aFetchedResultsController release];
-        [fetchRequest release];
-        [sortDescriptor release];
-        [sortDescriptors release];
     }
 	return fetchedResultsController;
 }
@@ -120,17 +110,10 @@ static NSString *kCellIdentifier = @"identifComments";
 
 - (void)viewDidUnload {
 	fetchedResultsController = nil;
-	[fetchedResultsController release];
 	cellComment = nil;
-	[cellComment release];
 	[super viewDidUnload];
 }
 
-- (void)dealloc {
-	[fetchedResultsController release];
-	[cellComment release];
-    [super dealloc];
-}
 
 @end
 

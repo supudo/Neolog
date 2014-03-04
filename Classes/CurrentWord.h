@@ -13,7 +13,7 @@
 	int nestID;
 }
 
-@property (nonatomic, retain) NSString *name, *email, *url, *word, *meaning, *example, *ethimology;
+@property (nonatomic, strong) NSString *name, *email, *url, *word, *meaning, *example, *ethimology;
 @property int nestID;
 
 @end

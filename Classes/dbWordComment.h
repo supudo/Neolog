@@ -14,12 +14,12 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * WordID;
-@property (nonatomic, retain) NSString * Comment;
-@property (nonatomic, retain) NSDate * CommentDate;
-@property (nonatomic, retain) NSString * Author;
-@property (nonatomic, retain) NSNumber * CommentID;
-@property (nonatomic, retain) dbWord * word;
+@property (nonatomic, strong) NSNumber * WordID;
+@property (nonatomic, strong) NSString * Comment;
+@property (nonatomic, strong) NSDate * CommentDate;
+@property (nonatomic, strong) NSString * Author;
+@property (nonatomic, strong) NSNumber * CommentID;
+@property (nonatomic, strong) dbWord * word;
 
 @end
 

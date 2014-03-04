@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[swPrivateData setOn:[nlSettings sharednlSettings].rememberPrivateData];
+	[swPrivateData setOn:[nlSettings sharedInstance].rememberPrivateData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -39,7 +39,7 @@
 	[entPD setSValue:(([swPrivateData isOn]) ? @"TRUE" : @"FALSE")];
 	NSError *error = nil;
 	if (![[[DBManagedObjectContext sharedDBManagedObjectContext] managedObjectContext] save:&error]) {
-		[[nlSettings sharednlSettings] LogThis:[NSString stringWithFormat:@"Error while saving the account info: %@", [error userInfo]]];
+		[[nlSettings sharedInstance] LogThis:@"Error while saving the account info: %@", [error userInfo]];
 		abort();
 	}
 }
@@ -47,7 +47,6 @@
 - (IBAction) iboAbout:(id)sender {
 	About *tvc = [[About alloc] initWithNibName:@"About" bundle:nil];
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 - (IBAction) iboChangeLanguage:(id)sender {
@@ -61,10 +60,10 @@
     [pickerView setDataSource:self];
     [pickerView setShowsSelectionIndicator:YES];
     
-    NSString *slang = [[nlSettings sharednlSettings] getLanguage];
+    NSString *slang = [[nlSettings sharedInstance] getLanguage];
     NSUInteger lindex = 0;
-    for (int i=0; i<[[nlSettings sharednlSettings].interfaceLanugages count]; i++) {
-        if ([slang isEqualToString:[[[nlSettings sharednlSettings].interfaceLanugages objectAtIndex:i] objectAtIndex:0]])
+    for (int i=0; i<[[nlSettings sharedInstance].interfaceLanugages count]; i++) {
+        if ([slang isEqualToString:[[[nlSettings sharedInstance].interfaceLanugages objectAtIndex:i] objectAtIndex:0]])
             lindex = i;
     }
     [pickerView selectRow:lindex inComponent:0 animated:NO];
@@ -72,8 +71,6 @@
     [menu addSubview:pickerView];
     [menu showFromTabBar:self.tabBarController.tabBar];
     [menu setBounds:CGRectMake(0, 0, 320, 680)];
-    [pickerView release];
-    [menu release];
 }
 
 #pragma mark -
@@ -84,7 +81,7 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [[[nlSettings sharednlSettings].interfaceLanugages objectAtIndex:row] objectAtIndex:1];
+    return [[[nlSettings sharedInstance].interfaceLanugages objectAtIndex:row] objectAtIndex:1];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -96,12 +93,12 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [[nlSettings sharednlSettings].interfaceLanugages count];
+    return [[nlSettings sharedInstance].interfaceLanugages count];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0 && selectedLanguage != -1) {
-        [[nlSettings sharednlSettings] setLanguage:[[[nlSettings sharednlSettings].interfaceLanugages objectAtIndex:selectedLanguage] objectAtIndex:0]];
+        [[nlSettings sharedInstance] setLanguage:[[[nlSettings sharedInstance].interfaceLanugages objectAtIndex:selectedLanguage] objectAtIndex:0]];
         [self setLanguageResources];
         int i = 0;
         NSString *l;
@@ -116,32 +113,17 @@
 #pragma mark -
 #pragma mark System
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return [nlSettings sharednlSettings].shouldRotate;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)viewDidUnload {
 	swPrivateData = nil;
-	[swPrivateData release];
 	lblPrivateData = nil;
-	[lblPrivateData release];
     btnLang = nil;
-    [btnLang release];
     btnAbout = nil;
-    [btnAbout release];
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-	[swPrivateData release];
-	[lblPrivateData release];
-    [btnLang release];
-    [btnAbout release];
-    [super dealloc];
-}
 
 @end

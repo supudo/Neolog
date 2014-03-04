@@ -15,9 +15,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.navigationItem.title = [nlSettings sharednlSettings].currentDbWord.Word;
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(sendComment)] autorelease];
-	txtAuthor.text = [nlSettings sharednlSettings].currentWord.name;
+	self.navigationItem.title = [nlSettings sharedInstance].currentDbWord.Word;
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(sendComment)];
+	txtAuthor.text = [nlSettings sharedInstance].currentWord.name;
 	if (webService == nil)
 		webService = [[WebService alloc] init];
 	[webService setDelegate:self];
@@ -29,25 +29,23 @@
 }
 
 - (void)sendComment {
-	[webService sendComment:[[nlSettings sharednlSettings].currentDbWord.WordID intValue] author:txtAuthor.text comment:txtComment.text];
+	[webService sendComment:[[nlSettings sharedInstance].currentDbWord.WordID intValue] author:txtAuthor.text comment:txtComment.text];
 }
 
 - (void)serviceError:(id)sender error:(NSString *)errorMessage {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 	[alert show];
-	[alert release];
 }
 	 
 - (void)sendCommentFinished:(id)sender {
-	[webService fetchWordComments:[[nlSettings sharednlSettings].currentDbWord.WordID intValue]];
+	[webService fetchWordComments:[[nlSettings sharedInstance].currentDbWord.WordID intValue]];
 }
 
 - (void)fetchWordCommentsFinished:(id)sender {
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:LocalizedString(@"Bravo", @"Bravo") delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	[alert show];
-	[alert release];
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -60,19 +58,10 @@
 
 - (void)viewDidUnload {
 	txtAuthor = nil;
-	[txtAuthor release];
 	txtComment = nil;
-	[txtComment release];
 	webService = nil;
-	[webService release];
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-	[txtAuthor release];
-	[txtComment release];
-	[webService release];
-    [super dealloc];
-}
 
 @end

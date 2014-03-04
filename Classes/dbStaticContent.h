@@ -13,8 +13,8 @@
 {
 }
 
-@property (nonatomic, retain) NSString * Content;
-@property (nonatomic, retain) NSNumber * ContentID;
+@property (nonatomic, strong) NSString * Content;
+@property (nonatomic, strong) NSNumber * ContentID;
 
 @end
 

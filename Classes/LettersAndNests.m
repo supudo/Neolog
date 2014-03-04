@@ -20,7 +20,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(toggleSearch)] autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(toggleSearch)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -36,9 +36,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"OrderPos" ascending:YES];
 	NSArray *arrSorters = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[sortDescriptor release];
 	nests = [[NSArray alloc] initWithArray:[[DBManagedObjectContext sharedDBManagedObjectContext] getEntities:@"Nest" sortDescriptors:arrSorters]];
-	[arrSorters release];
     
     self.headerNests = nil;
     self.headerLetters = nil;
@@ -58,7 +56,7 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 		self.searchDisplayController.searchBar.alpha = 0;
 		[self.view addSubview:self.searchDisplayController.searchBar];
 		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+		//[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDelay:.2];
 		[UIView setAnimationDuration:.4];
@@ -86,13 +84,13 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	if (section == 0)
 		return [nests count];
 	else
-		return [[nlSettings sharednlSettings].letters count] + 1;
+		return [[nlSettings sharedInstance].letters count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 		cell.textLabel.font = [UIFont fontWithName:@"Verdana-Bold" size:18.0];
@@ -100,10 +98,10 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	if (indexPath.section == 0)
 		cell.textLabel.text = ((dbNest *)[nests objectAtIndex:indexPath.row]).Title;
 	else {
-		if (indexPath.row >= [[nlSettings sharednlSettings].letters count])
+		if (indexPath.row >= [[nlSettings sharedInstance].letters count])
 			cell.textLabel.text = LocalizedString(@"l_dr", @"l_dr");
 		else
-			cell.textLabel.text = [[nlSettings sharednlSettings].letters objectAtIndex:indexPath.row];
+			cell.textLabel.text = [[nlSettings sharedInstance].letters objectAtIndex:indexPath.row];
 	}
 	return cell;
 }
@@ -114,13 +112,13 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 		[webService fetchWordsForNest:[((dbNest *)[nests objectAtIndex:indexPath.row]).ID intValue]];
 	}
 	else {
-		if (indexPath.row >= [[nlSettings sharednlSettings].letters count]) {
+		if (indexPath.row >= [[nlSettings sharedInstance].letters count]) {
 			navTitle = @"X";
 			[webService fetchWordsForLetter:@"X"];
 		}
 		else {
-			navTitle = [[nlSettings sharednlSettings].letters objectAtIndex:indexPath.row];
-			[webService fetchWordsForLetter:[[nlSettings sharednlSettings].letters objectAtIndex:indexPath.row]];
+			navTitle = [[nlSettings sharedInstance].letters objectAtIndex:indexPath.row];
+			[webService fetchWordsForLetter:[[nlSettings sharedInstance].letters objectAtIndex:indexPath.row]];
 		}
 	}
 }
@@ -139,7 +137,6 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 		[lblTitle setFont:[UIFont fontWithName:@"Verdana-Bold" size:22.0]];
 		[lblTitle setFrame:CGRectMake(10, 0, 300, 50)];
 		[headerNests addSubview:lblTitle];
-		[lblTitle release];
 	}
 	if (headerLetters == nil) {
 		headerLetters  = [[UIView alloc] init];
@@ -150,7 +147,6 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 		[lblTitle setFont:[UIFont fontWithName:@"Verdana-Bold" size:22.0]];
 		[lblTitle setFrame:CGRectMake(10, 0, 300, 50)];
 		[headerLetters addSubview:lblTitle];
-		[lblTitle release];
 	}
 	if (section == 0)
 		return headerNests;
@@ -166,28 +162,24 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"Error", @"Error")] delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 	alert.tag = 1;
 	[alert show];
-	[alert release];
 }
 
 - (void)fetchWordsForNestFinished:(id)sender {
 	Words *tvc = [[Words alloc] initWithNibName:@"Words" bundle:nil];
 	tvc.navTitle = navTitle;
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 - (void)fetchWordsForLetterFinished:(id)sender {
 	Words *tvc = [[Words alloc] initWithNibName:@"Words" bundle:nil];
 	tvc.navTitle = navTitle;
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 - (void)searchForWordsFinished:(id)sender {
 	Words *tvc = [[Words alloc] initWithNibName:@"Words" bundle:nil];
 	tvc.navTitle = LocalizedString(@"Search", @"Search");
 	[[self navigationController] pushViewController:tvc animated:YES];
-	[tvc release];
 }
 
 - (void)searchForWordsNoResultsFinished:(id)sender {
@@ -195,7 +187,6 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"SearchNoResults", @"SearchNoResults")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 	alert.tag = 3;
 	[alert show];
-	[alert release];
 }
 
 #pragma mark -
@@ -215,7 +206,6 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@.", LocalizedString(@"SearchTooSmall", @"SearchTooSmall")] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles:nil];
 		alert.tag = 2;
 		[alert show];
-		[alert release];
 	}
 	else
 		[webService searchForWords:[self.searchDisplayController searchBar].text];
@@ -224,35 +214,18 @@ static NSString *kCellIdentifier = @"identifLettersAndNests";
 #pragma mark -
 #pragma mark Memory management
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return [nlSettings sharednlSettings].shouldRotate;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)viewDidUnload {
 	nests = nil;
-	[nests release];
 	headerNests = nil;
-	[headerNests release];
 	headerLetters = nil;
-	[headerLetters release];
 	webService = nil;
-	[webService release];
 	navTitle = nil;
-	[navTitle release];
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-	[nests release];
-	[headerNests release];
-	[headerLetters release];
-	[webService release];
-	[navTitle release];
-    [super dealloc];
-}
 
 @end

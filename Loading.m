@@ -42,7 +42,6 @@
 	[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
 	BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@: %@", LocalizedString(@"Error", @"Error"), errorMessage] delegate:self cancelButtonTitle:LocalizedString(@"OK", @"OK") otherButtonTitles: nil];
 	[alert show];
-	[alert release];
 }
 
 - (void)getNestsFinished:(id)sender {
@@ -65,16 +64,12 @@
 	[appDelegate tabBarController].selectedIndex = 0;
 	[self.view.superview addSubview:tabBarView];
 	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+	//[UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDelay:.2];
 	[UIView setAnimationDuration:.4];
 	tabBarView.alpha = 1;
 	[UIView commitAnimations];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return [nlSettings sharednlSettings].shouldRotate;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,16 +78,9 @@
 
 - (void)viewDidUnload {
 	timer = nil;
-	[timer release];
 	webService = nil;
-	[webService release];
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-	[timer release];
-	[webService release];
-    [super dealloc];
-}
 
 @end

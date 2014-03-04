@@ -13,9 +13,9 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * ID;
-@property (nonatomic, retain) NSString * Title;
-@property (nonatomic, retain) NSNumber * OrderPos;
+@property (nonatomic, strong) NSNumber * ID;
+@property (nonatomic, strong) NSString * Title;
+@property (nonatomic, strong) NSNumber * OrderPos;
 
 @end
 

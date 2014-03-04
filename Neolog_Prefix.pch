@@ -2,10 +2,18 @@
 // Prefix header for all source files of the 'Neolog' target in the 'Neolog' project
 //
 
+#import <Availability.h>
+
+#define LocalizedString(n, m) [[nlSettings sharedInstance] getTranslation:n]
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
-	#import <UIKit/UIKit.h>
-	#import <CoreData/CoreData.h>
-	#import "NeologAppDelegate.h"
-	#import "nlSettings.h"
+    #import <UIKit/UIKit.h>
+    #import <CoreData/CoreData.h>
+    #import "NeologAppDelegate.h"
+    #import "nlSettings.h"
 #endif

@@ -14,8 +14,8 @@
 	WebService *webService;
 }
 
-@property (nonatomic, retain) NSTimer *timer;
-@property (nonatomic, retain) WebService *webService;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) WebService *webService;
 
 - (void)startSync;
 - (void)startSyncTimer;

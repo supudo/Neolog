@@ -6,32 +6,27 @@
 //  Copyright 2011 neolog.bg. All rights reserved.
 //
 
-#define LocalizedString(n, m) [[nlSettings sharednlSettings] getTranslation:n]
-
 #import <Foundation/Foundation.h>
-#import "SynthesizeSingleton.h"
 #import "CurrentWord.h"
 #import "dbWord.h"
 
 @interface nlSettings : NSObject {
-	BOOL inDebugMode, currentSendWordResponse, rememberPrivateData, shouldRotate;
+	BOOL inDebugMode, currentSendWordResponse, rememberPrivateData;
 	NSString *ServicesURL, *BuildVersion;
 	float LocationLatitude, LocationLongtitude;
 	CurrentWord *currentWord;
 	dbWord *currentDbWord;
 	NSArray *letters;
     NSMutableArray *interfaceLanugages;
-	NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
 }
 
-@property BOOL inDebugMode, currentSendWordResponse, rememberPrivateData, shouldRotate;
-@property (nonatomic, retain) NSString *ServicesURL, *BuildVersion;
+@property BOOL inDebugMode, currentSendWordResponse, rememberPrivateData;
+@property (nonatomic, strong) NSString *ServicesURL, *BuildVersion;
 @property float LocationLatitude, LocationLongtitude;
-@property (nonatomic, retain) CurrentWord *currentWord;
-@property (nonatomic, retain) dbWord *currentDbWord;
-@property (nonatomic, retain) NSArray *letters;
-@property (nonatomic, retain) NSMutableArray *interfaceLanugages;
-@property (nonatomic, retain) NSString *twitterOAuthConsumerKey, *twitterOAuthConsumerSecret, *facebookAppID, *facebookAppSecret;
+@property (nonatomic, strong) CurrentWord *currentWord;
+@property (nonatomic, strong) dbWord *currentDbWord;
+@property (nonatomic, strong) NSArray *letters;
+@property (nonatomic, strong) NSMutableArray *interfaceLanugages;
 
 - (void)LogThis:(NSString *)log, ...;
 - (BOOL)connectedToInternet;
@@ -39,6 +34,6 @@
 - (NSString *)getLanguage;
 - (NSString *)getTranslation:(NSString *)note;
 
-+ (nlSettings *)sharednlSettings;
++ (nlSettings *)sharedInstance;
 
 @end

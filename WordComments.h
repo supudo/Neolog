@@ -17,9 +17,9 @@
 	dbWordComment *entComment;
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) IBOutlet CellWordComment *cellComment;
-@property (nonatomic, retain) dbWordComment *entComment;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) IBOutlet CellWordComment *cellComment;
+@property (nonatomic, strong) dbWordComment *entComment;
 
 - (void)addComment;
 

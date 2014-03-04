@@ -14,11 +14,9 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
 }
 
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-+ (DBManagedObjectContext *)sharedDBManagedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSManagedObject *)getEntity:(NSString *)entityName predicateString:(NSString *)predicateString;
 - (NSManagedObject *)getEntity:(NSString *)entityName predicate:(NSPredicate *)predicate;
@@ -30,5 +28,7 @@
 - (BOOL) deleteObjects:(NSString *)entityName predicate:(NSPredicate *)predicate;
 
 - (NSString *)applicationDocumentsDirectory;
+
++ (DBManagedObjectContext *)sharedDBManagedObjectContext;
 
 @end

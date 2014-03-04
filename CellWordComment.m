@@ -35,9 +35,5 @@
 	[self setFrame:frameTemp];
 }
 
-- (void)dealloc {
-	[txtComment release];
-    [super dealloc];
-}
 
 @end

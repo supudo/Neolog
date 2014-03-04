@@ -32,7 +32,6 @@
 	[txt appendString:ent.Content];
 	[txt appendString:@"</div></body></html>"];
 	[webView loadHTMLString:txt baseURL:nil];
-	[txt release];
 }
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -41,7 +40,6 @@
 		[BlackAlertView setBackgroundColor:[UIColor blackColor] withStrokeColor:[UIColor whiteColor]];
 		BlackAlertView *alert = [[BlackAlertView alloc] initWithTitle:@"" message:LocalizedString(@"ExternalURLWarning", @"ExternalURLWarning") delegate:self cancelButtonTitle:LocalizedString(@"NONO", @"NONO") otherButtonTitles:LocalizedString(@"OK", @"OK"), nil];
 		[alert show];
-		[alert release];
 		return NO;
 	}
 	else {
@@ -55,26 +53,15 @@
 		[[UIApplication sharedApplication] openURL:self.clickedURL];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return [nlSettings sharednlSettings].shouldRotate;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)viewDidUnload {
 	webView = nil;
-	[webView release];
 	clickedURL = nil;
-	[clickedURL release];
     [super viewDidUnload];
 }
 
-- (void)dealloc {
-	[webView release];
-	[clickedURL release];
-    [super dealloc];
-}
 
 @end

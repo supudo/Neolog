@@ -13,18 +13,18 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * WordID;
-@property (nonatomic, retain) NSNumber * NestID;
-@property (nonatomic, retain) NSNumber * CommentCount;
-@property (nonatomic, retain) NSString * Example;
-@property (nonatomic, retain) NSString * Ethimology;
-@property (nonatomic, retain) NSString * AddedBy;
-@property (nonatomic, retain) NSString * AddedByURL;
-@property (nonatomic, retain) NSString * AddedByEmail;
-@property (nonatomic, retain) NSString * Word;
-@property (nonatomic, retain) NSString * Description;
-@property (nonatomic, retain) NSString * Derivatives;
-@property (nonatomic, retain) NSDate * AddedAtDate;
+@property (nonatomic, strong) NSNumber * WordID;
+@property (nonatomic, strong) NSNumber * NestID;
+@property (nonatomic, strong) NSNumber * CommentCount;
+@property (nonatomic, strong) NSString * Example;
+@property (nonatomic, strong) NSString * Ethimology;
+@property (nonatomic, strong) NSString * AddedBy;
+@property (nonatomic, strong) NSString * AddedByURL;
+@property (nonatomic, strong) NSString * AddedByEmail;
+@property (nonatomic, strong) NSString * Word;
+@property (nonatomic, strong) NSString * Description;
+@property (nonatomic, strong) NSString * Derivatives;
+@property (nonatomic, strong) NSDate * AddedAtDate;
 
 @end
 

@@ -13,10 +13,10 @@
 {
 }
 
-@property (nonatomic, retain) NSString * Email;
-@property (nonatomic, retain) NSString * Name;
-@property (nonatomic, retain) NSString * URL;
-@property (nonatomic, retain) NSNumber * NestID;
+@property (nonatomic, strong) NSString * Email;
+@property (nonatomic, strong) NSString * Name;
+@property (nonatomic, strong) NSString * URL;
+@property (nonatomic, strong) NSNumber * NestID;
 
 @end
 

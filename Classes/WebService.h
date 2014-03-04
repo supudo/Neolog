@@ -28,7 +28,7 @@
 @end
 
 @interface WebService : NSObject <NSXMLParserDelegate, URLReaderDelegate> {
-	id<WebServiceDelegate> delegate;
+	id<WebServiceDelegate> __weak delegate;
 	URLReader *urlReader;
 	NSManagedObjectContext *managedObjectContext;
 	NSString *currentElement;
@@ -39,14 +39,14 @@
 	dbWordComment *entWordComment;
 }
 
-@property (assign) id<WebServiceDelegate> delegate;
-@property (nonatomic, retain) URLReader *urlReader;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (weak) id<WebServiceDelegate> delegate;
+@property (nonatomic, strong) URLReader *urlReader;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property int OperationID;
-@property (nonatomic, retain) dbNest *entNest;
-@property (nonatomic, retain) dbStaticContent *entStaticContent;
-@property (nonatomic, retain) dbWord *entWord;
-@property (nonatomic, retain) dbWordComment *entWordComment;
+@property (nonatomic, strong) dbNest *entNest;
+@property (nonatomic, strong) dbStaticContent *entStaticContent;
+@property (nonatomic, strong) dbWord *entWord;
+@property (nonatomic, strong) dbWordComment *entWordComment;
 
 typedef enum NLServiceOperations {
 	NLOperationGetNests = 0,

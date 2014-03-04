@@ -14,8 +14,8 @@
 	BOOL alreadyLoaded;
 }
 
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) NSURL *clickedURL;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) NSURL *clickedURL;
 @property BOOL alreadyLoaded;
 
 @end
